@@ -51,16 +51,25 @@ export default StyleSheet.create({
         fontFamily:'GothamPro-Bold, sans-serif',
         margin:'0',
         background: 'url(/img/icon/up.png) no-repeat right',
-        backgroundSize: '16px'
+        backgroundSize: '16px',
+        '@media (max-width: 350px)': {
+            fontSize:'14px'
+        }
     },
     cardScore:{
         margin:'0',
         fontSize:'11px',
         color:'#fff',
-        lineHeight:'1'
+        lineHeight:'1',
+        '@media (max-width: 350px)': {
+            fontSize:'9px'
+        }
     },
     cardScoreActive:{
         fontSize:'16px',
+        '@media (max-width: 350px)': {
+            fontSize:'12px'
+        }
     },
     cardBottom:{
         width:'100%',
@@ -69,7 +78,10 @@ export default StyleSheet.create({
         paddingLeft:'15px',
         paddingRight:'15px',
         position:'absolute',
-        bottom:'30px'
+        bottom:'30px',
+        '@media (max-width: 350px)': {
+            height: '50px',
+        }
     },
     cardBottomLeft:{
         width:'30%',
@@ -78,10 +90,16 @@ export default StyleSheet.create({
     cardBottomNum:{
         fontSize:'12px',
         color:'#fff',
-        lineHeight:'1'
+        lineHeight:'1',
+        '@media (max-width: 350px)': {
+            fontSize:'10px'
+        }
     },
     cardBottomNumAction:{
-        fontSize:'32px'
+        fontSize:'32px',
+        '@media (max-width: 350px)': {
+            fontSize:'25px'
+        }
     },
     cardBottomRight:{
         width:'70%',
@@ -93,7 +111,11 @@ export default StyleSheet.create({
         height:'44px',
         border:'1px solid #fff',
         borderRadius:'4px',
-        marginTop:'11px'
+        marginTop:'11px',
+        '@media (max-width: 350px)': {
+            height:'38px',
+            marginTop:'6px'
+        }
     },
     cardButton:{
         width:'50%',
@@ -106,6 +128,10 @@ export default StyleSheet.create({
         paddingTop:'5px',
         ':nth-of-type(1)':{
             borderRight:'1px solid #fff'
+        },
+        '@media (max-width: 350px)': {
+            height:'37px',
+            fontSize:'7px'
         }
     },
     cardButtonText:{
@@ -116,5 +142,9 @@ export default StyleSheet.create({
         margin:'auto',
         marginTop:'2px',
         fontFamily:'GothamPro-Bold, sans-serif',
+        '@media (max-width: 350px)': {
+            fontSize:'9px',
+            width:'60px'
+        }
     }
 })

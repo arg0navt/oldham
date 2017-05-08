@@ -34,7 +34,11 @@ export default StyleSheet.create({
         fontSize:'12px',
         color:'#fff',
         width:'140px',
-        margin:'17px 15px 17px'
+        margin:'17px 15px 17px',
+        '@media (max-width: 350px)': {
+            width:'100%',
+            fontSize:'9px'
+        }
     },
     sliderLink:{
         fontFamily:'GothamPro-Medium, sans-serif',
@@ -45,6 +49,14 @@ export default StyleSheet.create({
         float:'right',
         paddingRight:'25px',
         background:'url(/img/icon/up.png) no-repeat right',
-        backgroundSize:'16px'
+        backgroundSize:'16px',
+        '@media (max-width: 350px)': {
+            fontSize:'11px'
+        }
+    },
+    rightBlock:{
+        '@media (max-width: 350px)': {
+            maxWidth:'39%'
+        }
     }
 })

@@ -9,7 +9,8 @@ export default StyleSheet.create({
         left:'0',
         background:'#0d0d0d',
         paddingLeft:'15px',
-        paddingRight:'15px'
+        paddingRight:'15px',
+        zIndex:'10'
     },
     sity:{
         fontSize:'14px',

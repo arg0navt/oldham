@@ -8,10 +8,10 @@ export default class Slider extends Component{
         return(
             <div className={css(bottomPanel.bottomPanel)}>
                 <Row>
-                    <Col xs="9">
+                    <Col xs="8">
                         <p className={css(bottomPanel.sity)}>Санкт-Петербург</p>
                     </Col>
-                    <Col xs="3">
+                    <Col xs="4">
                         <p className={css(bottomPanel.changeSity)}>Изменить</p>
                     </Col>
                 </Row>

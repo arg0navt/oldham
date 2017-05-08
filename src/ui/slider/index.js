@@ -18,7 +18,7 @@ const SlideItem = ({img, text}) => (
                 <Col xs="5">
                     <p className={css(slider.sliderText)}>{text}</p>
                 </Col>
-                <Col xs="5">
+                <Col xs="5" className={css(slider.rightBlock)}>
                     <Link to='/page' className={css(slider.sliderLink)}>Все акции</Link>
                 </Col>
             </Row>

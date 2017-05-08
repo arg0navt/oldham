@@ -62,7 +62,10 @@ export default StyleSheet.create({
         fontSize:'10px',
         color:'#ffe5e2',
         lineHeight:'10px',
-        marginTop:'4px'
+        marginTop:'4px',
+        '@media (max-width: 350px)': {
+            fontSize:'9px'
+        }
     },
     active:{
         color:'#fff',

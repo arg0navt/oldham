@@ -138,7 +138,7 @@ export default StyleSheet.create({
         backgroundSize:'cover',
     },
     bottomItem:{
-        width:'33.3%',
+        width:'50%',
         float:'left',
         paddingLeft:15,
         paddingRight:15,
@@ -173,7 +173,6 @@ export default StyleSheet.create({
     },
     border:{
         borderLeft:'1px solid #ab2e20',
-        borderRight:'1px solid #ab2e20'
     },
     numItem:{
         display:'none',

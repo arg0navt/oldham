@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import detail from '../../css/detail'
 import { css } from 'aphrodite/no-important';
-import { Item } from '../item'
+import Item from '../item'
 
 export const Recomendation = () => (
     <div className={css(detail.recomendation)}>

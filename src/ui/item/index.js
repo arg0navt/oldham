@@ -4,6 +4,7 @@ import { css } from 'aphrodite/no-important';
 import c from '../../css/catalogPage'
 import global from '../../css/global'
 import {Link} from 'react-router';
+import _ from 'underscore'
 
 class Item extends Component{
     constructor(props){
@@ -12,9 +13,23 @@ class Item extends Component{
     }
     sum(){
         this.setState({num: this.state.num + 1})
+        this.props.more(this.props.item)
+        const n = _.find(this.props.Store.basket, (item) => { return item.item_id == this.props.item.item_id; })
+        setTimeout(()=>{
+            let summ = 0
+            if (this.state.width == 30){
+                summ = n.item_price * n.call
+                this.props.addPrice(summ)
+            } else if (this.state.width == 40){
+                summ = n.item_price * n.call
+                this.props.addPrice(summ)
+            }
+        },10)
     }
     sub(){
         if(this.state.num > 1){this.setState({num:this.state.num - 1})}
+        this.props.sub(this.props.item)
+        this.props.subPrice(this.props.price)
     }
     add(){
         this.props.addBasket(this.props.item)
@@ -65,7 +80,10 @@ export default connect(
   }),
   dispatch =>({
     addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
-    addPrice: (price) => {dispatch({type:'PRICE', payload:parseFloat(price)})}
+    addPrice: (price) => {dispatch({type:'PRICE', payload:parseFloat(price)})},
+    more:(item) => {dispatch({type:'MORE', payload:item})},
+    sub:(item) => {dispatch({type:'SUB', payload:item})},
+    subPrice:(price) =>{dispatch({type:'OLD_PRICE', payload:parseFloat(price)})}
   })
 )(Item)
 

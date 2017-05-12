@@ -69,7 +69,6 @@ class Basket extends Component{
                 </div>
                 </div>
                 <Recomendation />
-                <CatalogPanel />
             </div>
         )
     }

@@ -13,7 +13,70 @@ export default StyleSheet.create({
         paddingTop:'75px',
         paddingLeft:'15px',
         paddingRight:'15px',
+        paddingBottom:85,
         overflow:'hidden',
-        margin:'auto'
-    }
+        margin:'auto',
+        width:'100%'
+    },
+    newIt:{
+        background:'#119229'
+    },
+    hitIt:{
+        background:'#e80057'
+    },
+    it15:{
+        background:'#e99821'
+    },
+    hot:{
+        background:'#f20000'
+    },
+    uiNum:{
+        width: 125,
+        height: 30,
+        display:'block',
+        borderRadius:4,
+        border:'1px solid #e64b3b',
+        marginTop:15
+    },
+    minus:{
+        width:31,
+        height:28,
+        background:'url(/img/icon/minus.png) #e64b3b no-repeat center center',
+        textAlign:'center',
+        color:'#ffffff',
+        lineHeight:'28px',
+        float:'left',
+        backgroundSize:15
+    },
+    plus:{
+        width:31,
+        height:28,
+        background:'url(/img/icon/plus.png) #e64b3b no-repeat center center',
+        textAlign:'center',
+        color:'#ffffff',
+        lineHeight:'28px',
+        float:'right',
+        backgroundSize:14
+    },
+    input:{
+        border:0,
+        height:28,
+        width:'calc(100% - 62px)',
+        float:'left',
+        background:'rgba(0,0,0,0)',
+        textAlign:'center',
+        color:'#ffffff',
+        fontFamily: 'GothamPro-Medium',
+        fontSize:14
+    },
+    addCart:{
+        width:'100%',
+        height:28,
+        background:'#e64b3b',
+        display:'block',
+        border:0,
+        fontSize:14,
+        color:'#ffffff',
+        fontFamily: 'GothamPro-Medium',
+    },
 })

@@ -13,11 +13,14 @@ export default StyleSheet.create({
     itemBlock:{
         width:'100%',
         height:'120px',
-        borderRadius:'5px'
+        borderRadius:'5px',
+        backgroundSize:'cover',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
     },
     catalogBlock:{
-        paddingTop:'15px',
-        paddingBottom:'60px'
+        paddingTop:'15px'
     },
     icon:{
         display: 'flex',
@@ -34,7 +37,6 @@ export default StyleSheet.create({
         color:'#fff',
         fontSize:'12px',
         margin:'0',
-        marginTop:'10px',
         minWidth:'63px',
         textAlign:'center',
         fontFamily:'GothamPro-Medium, sans-serif'

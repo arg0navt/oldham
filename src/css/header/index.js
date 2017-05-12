@@ -1,6 +1,25 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
 export default StyleSheet.create({
+    hide:{
+        display:'none'
+    },
+    opacityHeader:{
+        background:'rgba(0,0,0,0)',
+        height:60,
+        paddingTop: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
+        position:'fixed'
+    },
+    back:{
+        height:39,
+        width:39,
+        float:'left',
+    },
+    backImg:{
+        width:13
+    },
     header:{
         height:'60px',
         paddingTop:'15px',

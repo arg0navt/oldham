@@ -3,18 +3,22 @@ import { Container, Row, Col } from 'reactstrap';
 import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
 import catalog from '../../css/catalog'
+import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios'
+import { url } from '../../config/url'
+
 
 const CatalogItem = ({img, icon, text, link, width}) => (
-    <div className={css(catalog.itemCol)}>
+    <Col xs="6" className={css(catalog.itemCol)}>
+        <Link to={'/catalog' + link}>
         <div className={css(catalog.itemBlock)} style={{backgroundImage:'url(' + img + ')'}}>
             <div className={css(catalog.icon)}>
                 <div className={css(catalog.iconWrap)}>
-                    <img className={css(catalog.iconImg)} src={icon} alt={text} width={width} />
                     <p className={css(catalog.iconText)}>{text}</p>
                 </div>
             </div>
         </div>
-    </div>
+        </Link>
+    </Col>
 )
 
 export default class Slider extends Component{
@@ -22,15 +26,44 @@ export default class Slider extends Component{
         return(
             <div className={css(catalog.catalogBlock)}>
                 <Row className={css(catalog.catalogRow)}>
-                    <CatalogItem img={'/img/ui/item-1.jpg'} icon={'/img/icon/food/pizza.png'} text={'пицца'} link={'/pizza'} width={42} />
-                    <CatalogItem img={'/img/ui/item-2.jpg'} icon={'/img/icon/food/sushi.png'} text={'суши и роллы'} link={'/pizza'} width={50} /> 
-                    <CatalogItem img={'/img/ui/item-3.jpg'} icon={'/img/icon/food/wok.png'} text={'WOK'} link={'/pizza'} width={50} /> 
-                    <CatalogItem img={'/img/ui/item-4.jpg'} icon={'/img/icon/food/pasta.png'} text={'паста'} link={'/pizza'} width={43} /> 
-                    <CatalogItem img={'/img/ui/item-5.jpg'} icon={'/img/icon/food/beverages.png'} text={'напитки'} link={'/pizza'} width={35} /> 
-                    <CatalogItem img={'/img/ui/item-6.jpg'} icon={'/img/icon/food/snacks.png'} text={'закуски'} link={'/pizza'} width={56} /> 
-                    <CatalogItem img={'/img/ui/item-7.jpg'} icon={'/img/icon/food/salad.png'} text={'салаты'} link={'/pizza'} width={55} /> 
-                    <CatalogItem img={'/img/ui/item-8.jpg'} icon={'/img/icon/food/dessert.png'} text={'десерты'} link={'/pizza'} width={49} /> 
-                    <CatalogItem img={'/img/ui/item-9.jpg'} icon={'/img/icon/food/sup.png'} text={'супы'} link={'/pizza'} width={55} />    
+                    <Get url={`${url.url}?commands=[{%22data%22:{%22client_id%22:%22${url.userId}%22,%22platform%22:%221%22}}]`}>
+                        {(error, response, isLoading) => {
+                            if(error) {
+                                return (<div>Something bad happened: {error.message}</div>)
+                            } else if(response !== null) {
+                                return (
+                                    <Row>
+                                        {response.data[0].result.map((item, index) => {
+                                            return(
+                                                <CatalogItem key={index} img={`http://dev.kaerus.ru/uploads/${item.category_image}`} text={item.category_name} link={
+                                                    item.category_name == 'Пицца' ?
+                                                        '/pizza' :
+                                                    item.category_name == 'Суши и роллы' ?
+                                                        '/sushi' :
+                                                    item.category_name == 'Вок' ?
+                                                        '/woki' :
+                                                    item.category_name == 'Паста' ?
+                                                        '/pasta' :
+                                                    item.category_name == 'Напитки' ?
+                                                        '/beverages' :
+                                                    item.category_name == 'Закуски' ?
+                                                        '/snacks' :  
+                                                    item.category_name == 'Салаты' ?
+                                                        '/salad' :
+                                                    item.category_name == 'Десерты' ?
+                                                        '/dessert' :
+                                                    item.category_name == 'Супы' ?
+                                                        '/sup' : ''                                 
+                                                } />
+                                            )
+                                        })}
+                                    </Row>
+                                )
+                            }
+                            return (<div></div>)
+                        }}
+                    </Get>
+                        
                 </Row>
             </div>
         )

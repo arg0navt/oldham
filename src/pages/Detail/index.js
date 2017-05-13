@@ -16,8 +16,8 @@ class Detail extends Component{
         super(props)
         this.state = {
             id:'',
-            call30:1,
-            call40:1,
+            call30:0,
+            call40:0,
         }
     }
     componentDidMount(){
@@ -43,6 +43,8 @@ class Detail extends Component{
                         this.setState({call40:1})
                     }
                 }
+            } else {
+                this.setState({call30:1,call40:1})
             }
         },100)
     }
@@ -62,19 +64,32 @@ class Detail extends Component{
                     } else {
                         price = price + parseFloat(item.item_size_m_price)
                     } 
+                } else {
+                    price = price + parseFloat(item.item_price)
                 }
             })
             this.props.price(price)
         },10)
     }
-    sum(){
-        this.setState({num: this.state.num + 1})
-        this.props.more(this.props.item)
+    sum30(item){
+        this.setState({num: this.state.call30 + 1})
+        this.props.more(item)
         this.price()
     }
-    sub(){
-        if(this.state.num > 1){this.setState({num:this.state.num - 1})}
-        this.props.sub(this.props.item)
+    sub30(item){
+        if(this.state.call30 > 1){this.setState({num:this.state.call30 - 1})}
+        this.props.sub(item)
+        this.price()
+    }
+    add(item){
+        this.props.addBasket(item)
+        setTimeout(()=>{
+            if (this.state.width == 30){
+                this.props.width30(item)
+            } else if (this.state.width == 40){
+                this.props.width40(item)
+            }
+        },10)
         this.price()
     }
     render(){
@@ -111,17 +126,8 @@ class Detail extends Component{
                                                 <div className={css(detail.price)}>{item.item_price} ₽</div>
                                             </div>
                                             <div className={css(detail.listItemRight)}>
-                                                {this.state.call30 > 1 ? (
-                                                    <div className={css(global.uiNum)}>
-                                                        <div className={css(global.minus)}></div>
-                                                        <input className={css(global.input)} type="text" value={this.state.call30} />
-                                                        <div className={css(global.plus)}></div>
-                                                    </div>
-                                                ) : (
-                                                    <div></div>
-                                                )}
                                                 <div className={css(global.uiNum)}>
-                                                    <button className={css(global.addCart)}>В корзину</button>
+                                                    <button onClick={this.add.bind(this, item)} className={css(global.addCart)}>В корзину</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,17 +140,8 @@ class Detail extends Component{
                                                 <div className={css(detail.price)}>{item.item_size_m_price} ₽</div>
                                             </div>
                                             <div className={css(detail.listItemRight)}>
-                                                {this.state.call40 > 1 ? (
-                                                    <div className={css(global.uiNum)}>
-                                                        <div className={css(global.minus)}></div>
-                                                        <input className={css(global.input)} type="text" value={this.state.call40} />
-                                                        <div className={css(global.plus)}></div>
-                                                    </div>
-                                                ) : (
-                                                    <div></div>
-                                                )}
                                                 <div className={css(global.uiNum)}>
-                                                    <button className={css(global.addCart)}>В корзину</button>
+                                                    <button onClick={this.add.bind(this, item)} className={css(global.addCart)}>В корзину</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,6 +164,7 @@ export default connect(
     Store: state
   }),
   dispatch =>({
+    addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
     more:(item) => {dispatch({type:'MORE', payload:item})},
     sub:(item) => {dispatch({type:'SUB', payload:item})},
     price:(price) => {dispatch({type:'PRICE', payload:price})}

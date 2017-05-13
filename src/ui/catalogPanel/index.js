@@ -27,12 +27,6 @@ class CatalogPanel extends Component {
                                 </p>
                             </div>
                         </Link>
-                        <div className={css(c.bottomItem, c.iconUp)}>
-                            <p className={css(c.bottomTextOne)}>Добавим</p>
-                            <p className={css(c.bottomTextTwo)}>
-                                <span className={css(c.bottomTextTwoSpan)}>30</span> баллов
-                            </p>
-                        </div>
                     </div>
                 ) : (<div></div>)}
             </div>

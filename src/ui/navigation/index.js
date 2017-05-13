@@ -24,19 +24,19 @@ const navItem = [
         name:'Гарантии',
         icon:'/img/icon/nav/icon-3.png',
         width:16,
-        link:'/'
+        link:'/guarantees'
     },
     {
         name:'О доставке',
         icon:'/img/icon/nav/icon-4.png',
         width:20,
-        link:'/'
+        link:'/delivery'
     },
     {
         name:'Контакты',
         icon:'/img/icon/nav/icon-5.png',
         width:21,
-        link:'/'
+        link:'/contact'
     },
     {
         name:'Помощь',
@@ -94,55 +94,38 @@ const options = {
 class Navigation extends Component{
     constructor(props){
         super(props)
-        this.state = {
-            x:0,
-            o:1
-        }
+        this.state = {x:0,o:1}
     }
     handleSwipe(ev){
         if(ev.deltaX < 0){
             const procent = 22
             const n = 100 - ev.distance
             const coefficient = n/procent * .1
-            if (coefficient < 1){
-                this.setState({o:coefficient})
-            }
+            if (coefficient < 1){this.setState({o:coefficient})}
             this.setState({x:ev.deltaX})
         }
     }
     endSwipe(ev){
         if(ev.deltaX < -100){
             this.props.toggleNav()
-            this.setState({
-                x:-320,
-                o:0
-            })
-            setTimeout(() => {
-                this.setState({
-                x:0,
-                o:1
-            },100)
-            })
-        } else {
-            this.setState({
-                x:0,
-                o:1
-            })
-        }
+            this.setState({x:0,o:1})
+        } else {this.setState({x:0,o:1})}
+    }
+    close(){
+        this.props.toggleNav()
+        this.setState({x:0,o:1})
     }
     render(){
         return(
             <Hammer onPanEnd={this.endSwipe.bind(this)} onPan={this.handleSwipe.bind(this)} options={options}>
             <div>
-                <div className={this.props.Store.nav == false ? css(nav.navWrap) : css([nav.navWrap, nav.activeShadow])} style={this.props.Store.nav == true ? {opacity:this.state.o} : {}}></div>
+                <div className={this.props.Store.nav == false ? css(nav.navWrap) : css([nav.navWrap, nav.activeShadow])} style={this.props.Store.nav == true ? {opacity:this.state.o} : {}} onClick={this.close.bind(this)}></div>
                 <div className={this.props.Store.nav == false ? css(nav.nav) : css([nav.nav, nav.navActive])} style={this.props.Store.nav == true ? {left:this.state.x} : {}}>
                 <div className={css(login.avtorization)}>
-                    <Loginization status={true}/>
                 </div>
                 <ul className={css(nav.ul)}>
                     {navItem.map((item, index) => <li key={index} className={css(nav.li)}><Link to={item.link}><div className={css(nav.iconWrap)}><img className={css(nav.icon)} src={item.icon} style={{width:item.width}} /></div><p className={css(nav.liText)}>{item.name}</p></Link></li>)}
                 </ul>
-                <img className={css(nav.navLogo)} src="/img/icon/nav/logo_nav.png" alt=""/>
             </div>
             </div>
             </Hammer>

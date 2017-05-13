@@ -13,10 +13,13 @@ export default StyleSheet.create({
         paddingTop:'75px',
         paddingLeft:'15px',
         paddingRight:'15px',
-        paddingBottom:85,
+        paddingBottom:'30px',
         overflow:'hidden',
         margin:'auto',
         width:'100%'
+    },
+    contentPadding:{
+        paddingBottom:85,
     },
     newIt:{
         background:'#119229'

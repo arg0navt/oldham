@@ -10,9 +10,8 @@ export default StyleSheet.create({
         height:'173px',
         backgroundSize:'cover',
         backgroundRepeat: 'no-repeat',
-        paddingRight:'15px',
-        paddingLeft:'15px',
-        margin:'auto',
+        width:'calc(100% - 30px)',
+        marginLeft:15,
         position:'relative'
     },
     blockImg:{

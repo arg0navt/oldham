@@ -22,7 +22,7 @@ class Header extends Component{
                         <Logo />
                     </Col>
                     <Col xs="4">
-                        <Shop />
+                        <Link to="/basket"><Shop /></Link>
                     </Col>
                 </Row>
                 <div className={this.props.status == "hide" ? css(styleHeader.back) : css(styleHeader.hide)}>

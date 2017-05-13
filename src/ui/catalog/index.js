@@ -41,7 +41,7 @@ export default class Slider extends Component{
                                                     item.category_name == 'Суши и роллы' ?
                                                         '/sushi' :
                                                     item.category_name == 'Вок' ?
-                                                        '/woki' :
+                                                        '/wok' :
                                                     item.category_name == 'Паста' ?
                                                         '/pasta' :
                                                     item.category_name == 'Напитки' ?

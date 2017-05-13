@@ -145,7 +145,7 @@ export default class Catalog extends Component{
                                         <div>
                                             {res.data[0].result.map((item, index) => {
                                                 return(
-                                                    <Item key={index} item={item} category={item.category_name} name={item.item_name} description={item.item_description} imageS={item.item_image_s} imageM={item.item_image_m} price={item.item_price} priceOld={item.item_size_m_price} id={item.item_id} />
+                                                    <Item key={index} item={item} category={item.category_name} name={item.item_name} description={item.item_description} imageS={item.item_image_s} imageM={item.item_image_m} id={item.item_id} />
                                                 )
                                             })}
                                         </div>

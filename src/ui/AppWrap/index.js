@@ -17,7 +17,7 @@ class AppWrap extends Component{
       <div className={css(AppCss.App)}>
         <Header status={this.props.params.goods == 'goods' ? 'hide' : ''} />
         <Navigation />
-        <section className={css(global.content)}>
+        <section className={this.props.Store.basket.length > 0 ? css(global.content, global.contentPadding) : css(global.content)}>
             {this.props.children}
         </section>
         <CatalogPanel />

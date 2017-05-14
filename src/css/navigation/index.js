@@ -21,7 +21,7 @@ export default StyleSheet.create({
     },
     nav:{
         position:'fixed',
-        width:320,
+        width:220,
         height:'100%',
         top:0,
         left:'-320px',

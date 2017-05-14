@@ -146,7 +146,6 @@ class Detail extends Component{
                                             </div>
                                         </div>
                                         ) : (<div></div>)}
-                                        <div className={css(detail.addIngredient)}><p className={css(detail.addIngredientText)}><img className={css(detail.addIngredientImg)} src="/img/icon/plus.png" />Добавить ингредиенты</p></div>
                                     </div>
                                 </div>
                             )

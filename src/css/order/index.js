@@ -6,7 +6,8 @@ export default StyleSheet.create({
         width: 'calc(100% + 30px)',
         marginLeft:-15,
         marginTop:-15,
-        overflow:'hidden'
+        overflow:'hidden',
+        paddingBottom:30
     },
     orderTitle:{
         fontSize:14,
@@ -72,5 +73,32 @@ export default StyleSheet.create({
     },
     inputBlockDuoTwo:{
         paddingLeft:15
+    },
+    deferItem:{
+        borderTop:'1px solid #585b60',
+        borderBottom:'1px solid #585b60',
+        padding:20,
+        paddingLeft:30,
+        paddingRight:30
+    },
+    defer:{
+        width:'100%',
+        overflow:'hidden'
+    },
+    none:{
+        display:'none'
+    },
+    deferP:{
+        color:'#4f545a',
+        fontFamily: 'GothamPro-Medium',
+        fontSize:12,
+        paddingLeft:39,
+        marginBottom:5
+    },
+    timeWr:{
+        overflow:'hidden'
+    },
+    borderTopNone:{
+        borderTop:0
     }
 })

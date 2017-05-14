@@ -9,7 +9,7 @@ import styleHeader from '../../css/header';
 
 const NavButton = ({click}) => <div onClick={click} className={css(styleHeader.buttonNav)}></div>
 const Logo = () => <Link to="/"><div className={css(styleHeader.logo)}><img className={css(global.img)} src="/img/icon/logo.png" /></div></Link>
-const Shop = () => <div className={css(styleHeader.buttonShop)}><div className={css(styleHeader.numShop)}></div></div>
+const Shop = ({length}) => <div className={css(styleHeader.buttonShop)}>{length > 0 ? <div className={css(styleHeader.numShop)}></div> : <div></div>}</div>
 
 class Header extends Component{
     render(){
@@ -29,7 +29,9 @@ class Header extends Component{
                         <Logo />
                     </Col>
                     <Col xs="4">
-                        <Link to="/basket"><Shop /></Link>
+                        {this.props.Store.routing.locationBeforeTransitions.pathname != '/basket' ? (
+                            <Link to="/basket"><Shop length={this.props.Store.basket.length } /></Link>
+                        ) : (<div></div>)}
                     </Col>
                 </Row>
                 <div className={this.props.status == "hide" ? css(styleHeader.back) : css(styleHeader.hide)}>

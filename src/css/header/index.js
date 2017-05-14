@@ -18,19 +18,21 @@ export default StyleSheet.create({
         float:'left',
     },
     backImg:{
-        width:13
+        width:16,
+        marginTop:3
     },
     header:{
         height:'60px',
         paddingTop:'15px',
-        background:'#111111',
         paddingLeft:'15px',
         paddingRight:'15px',
         position:'fixed',
         top:'0',
         left:'0',
         width:'100%',
-        zIndex:'10'
+        zIndex:'10',
+        background:'url(/img/bg.jpg) repeat-y',
+        backgroundSize:'contain',
     },
     buttonNav:{
         width:'25px',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
 import c from '../../css/catalogPage'
@@ -7,7 +8,8 @@ import _ from 'underscore'
 import Hammer from 'react-hammerjs';
 import Item from '../../ui/item'
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios'
-import { url } from '../../config/url' 
+import { url } from '../../config/url'
+import cookie from 'react-cookies' 
 
 const options = {
     touchAction:'compute',
@@ -19,14 +21,15 @@ const options = {
     }
 }
 
-export default class Catalog extends Component{
+class Catalog extends Component{
     constructor(props){
         super(props)
         this.state = {
             marginTab:0,
             x:145,
             l:0,
-            n:0
+            n:0,
+            tabShow:false
         }
         this.newState = this.newState.bind(this)
     }
@@ -88,7 +91,10 @@ export default class Catalog extends Component{
             x: -(window.innerWidth * this.state.n),
             marginTab: window.innerWidth/2 - document.querySelector('.tabLinkActive').offsetLeft - heightItem/2
         })
-        },500)
+    },500)
+    setTimeout(()=>{
+            this.setState({tabShow:true})
+        },800)
     }
     listSwipe(ev){
         if(ev.deltaX < 0){
@@ -111,13 +117,42 @@ export default class Catalog extends Component{
             this.marginState()
         },10)
     }
+    price(){
+        let price = 0
+        setTimeout(()=>{
+            this.props.Store.basket.map((item, index) => {
+                if (item.width == 30){
+                    if (item.call != undefined){
+                        price = price + parseFloat(item.item_price) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_price)
+                    }
+                } else if (item.width == 40){
+                    if (item.call != undefined){
+                        price = price + parseFloat(item.item_size_m_price) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_size_m_price)
+                    } 
+                }
+            })
+            this.props.price(price)
+        },10)
+    }
+    componentWillMount(){
+        if (cookie.load('basket') != []){
+            cookie.load('basket').map((item, index) => {
+                this.props.addBasket(item)
+            })
+            this.price()
+        }
+    }
     render(){
         const children = this.props.children;
         return (
             <div className={css(global.catalog)}>
                 <div className={css(c.tabBlock)}>
                     <div className={css(c.tabWr)}>
-                        <div className={css(c.tabItem)} style={{transform: 'translate3d('+ this.state.marginTab + 'px, 0px, 0px)'}}>
+                        <div className={css(c.tabItem)} style={this.state.tabShow == false ? {transform: 'translate3d('+ this.state.marginTab + 'px, 0px, 0px)',opacity:'0'} : {transform: 'translate3d('+ this.state.marginTab + 'px, 0px, 0px)',opacity:'1'}}>
                             <Get url={`${url.url}?commands=[{%22data%22:{%22client_id%22:%22${url.userId}%22,%22platform%22:%221%22}}]`}>
                                 {(error, response, isLoading) => {
                                     if(error) { return (<div>Something bad happened: {error.message}</div>)}
@@ -161,3 +196,12 @@ export default class Catalog extends Component{
         )
     }
 }
+export default connect(
+  state => ({
+    Store: state
+  }),
+  dispatch =>({
+    addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
+    price:(price) => {dispatch({type:'PRICE', payload:price})}
+  })
+)(Catalog)

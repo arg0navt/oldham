@@ -9,7 +9,7 @@ class ItemBasket extends Component{
     constructor(props){
         super(props)
         this.state = {
-            num: 0
+            num: 1
         }
     }
     componentDidMount(){
@@ -46,9 +46,11 @@ class ItemBasket extends Component{
         this.price()
     }
     sub(){
-        if(this.state.num > 1){this.setState({num:this.state.num - 1})}
-        this.props.sub(this.props.item)
-        this.price()
+        if(this.state.num > 1){
+            this.setState({num:this.state.num - 1})
+            this.props.sub(this.props.item)
+            this.price()
+        }
     }
     render(){
         return(
@@ -56,7 +58,7 @@ class ItemBasket extends Component{
                 <div className={css(basket.itemTop)}>
                     <div className={css(basket.itemTopLeft)}>
                         <p className={css(basket.type)}>{this.props.item.category_name}</p>
-                        <p className={css(basket.name)}>{this.props.item.item_name}</p>
+                        <p className={css(basket.name)}>{this.props.item.item_name} ({this.props.item.width} см)</p>
                     </div>
                     <div className={css(basket.itemTopRight)}>
                         <div className={css(global.uiNum, basket.uiNum)}>
@@ -69,8 +71,10 @@ class ItemBasket extends Component{
                 <p className={css(basket.summ)}>{
                     this.props.item.width == 30 && this.props.item.call == undefined ? `${this.props.item.item_price}` : 
                     this.props.item.width == 40 && this.props.item.call == undefined ? `${this.props.item.item_size_m_price}` :
-                    this.props.item.width == 30 && this.props.item.call != undefined ? `${this.props.item.item_price} x ${this.props.item.call} = ${parseFloat(this.props.item.item_price) * parseFloat(this.props.item.call)}` :
-                    this.props.item.width == 40 && this.props.item.call != undefined ? `${this.props.item.item_size_m_price} x ${this.props.item.call} = ${parseFloat(this.props.item.item_size_m_price) * parseFloat(this.props.item.call)}` :
+                    this.props.item.width == 30 && this.props.item.call != undefined && this.props.item.call != 1 ? `${this.props.item.item_price} x ${this.props.item.call} = ${parseFloat(this.props.item.item_price) * parseFloat(this.props.item.call)}` :
+                    this.props.item.width == 40 && this.props.item.call != undefined && this.props.item.call != 1 ? `${this.props.item.item_size_m_price} x ${this.props.item.call} = ${parseFloat(this.props.item.item_size_m_price) * parseFloat(this.props.item.call)}` :
+                    this.props.item.width == 40 && this.props.item.call != undefined && this.props.item.call == 1 ? `${this.props.item.item_size_m_price}` :
+                    this.props.item.width == 30 && this.props.item.call != undefined && this.props.item.call == 1 ? `${this.props.item.item_price}` :
                     '' }
                 </p>
             </div>      

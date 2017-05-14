@@ -122,9 +122,12 @@ class Navigation extends Component{
                 <div className={this.props.Store.nav == false ? css(nav.navWrap) : css([nav.navWrap, nav.activeShadow])} style={this.props.Store.nav == true ? {opacity:this.state.o} : {}} onClick={this.close.bind(this)}></div>
                 <div className={this.props.Store.nav == false ? css(nav.nav) : css([nav.nav, nav.navActive])} style={this.props.Store.nav == true ? {left:this.state.x} : {}}>
                 <div className={css(login.avtorization)}>
+                    <Link onClick={this.close.bind(this)} to="/">
+                        <img src="/img/icon/nav/logo_nav.png" style={{width:'70px',margin:'auto',display:'block'}} alt=""/>
+                    </Link>
                 </div>
                 <ul className={css(nav.ul)}>
-                    {navItem.map((item, index) => <li key={index} className={css(nav.li)}><Link to={item.link}><div className={css(nav.iconWrap)}><img className={css(nav.icon)} src={item.icon} style={{width:item.width}} /></div><p className={css(nav.liText)}>{item.name}</p></Link></li>)}
+                    {navItem.map((item, index) => <li key={index} className={css(nav.li)}><Link to={item.link} onClick={this.close.bind(this)}><div className={css(nav.iconWrap)}><img className={css(nav.icon)} src={item.icon} style={{width:item.width}} /></div><p className={css(nav.liText)}>{item.name}</p></Link></li>)}
                 </ul>
             </div>
             </div>

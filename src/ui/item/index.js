@@ -4,6 +4,7 @@ import { css } from 'aphrodite/no-important';
 import c from '../../css/catalogPage'
 import global from '../../css/global'
 import {Link} from 'react-router';
+import cookie from 'react-cookies'
 import _ from 'underscore'
 
 class Item extends Component{
@@ -42,9 +43,11 @@ class Item extends Component{
         this.price()
     }
     sub(){
-        if(this.state.num > 1){this.setState({num:this.state.num - 1})}
-        this.props.sub(this.props.item)
-        this.price()
+        if(this.state.num > 1){
+            this.setState({num:this.state.num - 1})
+            this.props.sub(this.props.item)
+            this.price()
+        }
     }
     add(){
         this.props.addBasket(this.props.item)
@@ -104,8 +107,10 @@ class Item extends Component{
                     </div>
                 </div>
                 <div className={css(c.itemText)}>
+                    <Link to={`/catalog/${this.state.link}/${this.props.item.item_id}`}>
                     <p className={css(c.name)}>{this.props.name}</p>
                     <p className={css(c.descroption)}>{this.props.description}</p>
+                    </Link>
                     {this.props.category == 'Пицца' && this.props.item.item_size_m_price != null ? (
                         <div className={css(c.width)}>
                             <div onClick={this.widthW.bind(this, 30)} className={this.state.width == 30 ? css(c.widthItem, c.widthItemActive) : css(c.widthItem)}>30 см</div>

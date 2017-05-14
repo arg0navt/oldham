@@ -2,9 +2,10 @@ import { StyleSheet } from 'aphrodite/no-important';
 
 export default StyleSheet.create({
     itemCol:{
-        flex:'0 50%',
-        maxWidth:'50%',
+        width:'50%',
+        float:'left',
         padding:'2.5px',
+        position:'relative'
     },
     catalogRow:{
         marginLeft:'-2.5px',
@@ -15,9 +16,17 @@ export default StyleSheet.create({
         height:'120px',
         borderRadius:'5px',
         backgroundSize:'cover',
-        backgroundSize: 'contain',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+    },
+    itemText:{
+        position:'relative',
+        zIndex:1
+    },
+    blockImage:{
+        opacity:.3,
+        position:'absolute',
+        width:'calc(100% - 5px)'
     },
     catalogBlock:{
         paddingTop:'15px'

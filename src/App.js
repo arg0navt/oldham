@@ -15,6 +15,8 @@ import Order from './pages/Order'
 import Contact from './pages/Contact'
 import Delivery from './pages/Delivery'
 import Guarantees from './pages/Guarantees'
+import Payment from './pages/Payment'
+import End from './pages/End'
 import './fonts/GothamPro/styles.css'
 import './fonts/GothamPro-Medium/styles.css'
 import './fonts/GothamPro-Bold/styles.css'
@@ -41,6 +43,8 @@ const routes = (
     <Route path="/contact" component={Contact}></Route>
     <Route path="/guarantees" component={Guarantees}></Route>
     <Route path="/delivery" component={Delivery}></Route>
+    <Route path="/payment" component={Payment}></Route>
+    <Route path="/end" component={End}></Route>
   </Route>
 )
 

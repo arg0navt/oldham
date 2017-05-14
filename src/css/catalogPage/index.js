@@ -13,7 +13,9 @@ export default StyleSheet.create({
         zIndex:10
     },
     tabItem:{
+        transform: 'translate3d(146.5px, 0px, 0px)',
         whiteSpace: "nowrap",
+        opacity:0,
         transition:'.2s all linear',
     },
     category:{
@@ -30,7 +32,17 @@ export default StyleSheet.create({
         width:'100%',
         padding:15,
         marginLeft:-15,
-        borderBottom:'1px solid #3e3e3e',
+        position:'relative',
+        ':after':{
+            width:'100%',
+            content:'""',
+            height:1,
+            background:'rgba(255,255,255,.1)',
+            position:'absolute',
+            bottom:0,
+            display:'block',
+            left:0
+        }
     },
     itemPich:{
         width:85,
@@ -70,9 +82,10 @@ export default StyleSheet.create({
         fontSize:12,
         color:'#ffffff',
         marginTop:0,
-        height: '35px',
+        height: '28px',
         whiteSpace:'initial',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        lineHeight:'1.1'
     },
     num:{
         width:81,
@@ -163,15 +176,13 @@ export default StyleSheet.create({
         fontFamily: 'GothamPro-Bold'
     },
     iconKorz:{
-        paddingLeft:40,
-        background:'url(/img/icon/korz.png) no-repeat 10px center',
+        paddingLeft:55,
+        background:'url(/img/icon/korz.png) no-repeat 15px center',
         backgroundSize:23,
     },
-    iconUp:{
-        background:'url(/img/icon/up.png) no-repeat 100px center',
-        backgroundSize:16,
-    },
     border:{
+        background:'url(/img/icon/up.png) no-repeat 155px center',
+        backgroundSize:16,
         borderLeft:'1px solid #ab2e20',
     },
     numItem:{
@@ -215,5 +226,16 @@ export default StyleSheet.create({
     widthItemActive:{
         background:'#dc4738',
         borderRadius:4
+    },
+    nextOrder:{
+        fontSize:21,
+        color:'#ffffff',
+        fontFamily: 'GothamPro-Bold',
+        textAlign:'center',
+        background:'url(/img/icon/up.png) no-repeat center right 15px',
+        width: '100%',
+        display: 'block',
+        lineHeight:'63px',
+        backgroundSize: '16px'
     }
 })

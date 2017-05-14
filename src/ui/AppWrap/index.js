@@ -20,7 +20,7 @@ class AppWrap extends Component{
         <section className={this.props.Store.basket.length > 0 ? css(global.content, global.contentPadding) : css(global.content)}>
             {this.props.children}
         </section>
-        <CatalogPanel />
+        <CatalogPanel location={this.props.location} />
       </div>
     )
   }

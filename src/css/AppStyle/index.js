@@ -5,6 +5,7 @@ export default StyleSheet.create({
         background:'url(/img/bg.jpg) repeat-y',
         minHeight:'100vh',
         backgroundSize:'contain',
-        overflow:'hidden'
+        overflow:'hidden',
+        boxShadow: 'inset 20px 20px 80px rgba(0,0,0,.8)'
     }
 })

@@ -6,6 +6,7 @@ import c from '../../css/catalogPage'
 import {IndexRoute, IndexRedirect,Router,Route,browserHistory} from 'react-router';
 import p from '../../css/payment'
 import axios  from 'axios';
+import cookie from 'react-cookies' 
 
 class Payment extends Component{
     constructor(props){
@@ -15,14 +16,42 @@ class Payment extends Component{
             type:'type1'
         }
     }
-    componentDidMount(){
+    price(){
+        let price = 0
         setTimeout(()=>{
-            const url = this.props.location.pathname
-            const urlArr = url.split('/')
-            const first = urlArr[1]
-            this.setState({
-                url: first
+            this.props.Store.basket.map((item, index) => {
+                if (item.width == 30){
+                    if (item.call != undefined){
+                        price = price + parseFloat(item.item_price) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_price)
+                    }
+                } else if (item.width == 40){
+                    if (item.call != undefined){
+                        price = price + (parseFloat(item.item_price) + parseFloat(item.item_size_m_price)) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_price) + parseFloat(item.item_size_m_price)
+                    } 
+                }
             })
+            this.props.price(price)
+        },10)
+    }
+    componentDidMount(){
+        if(cookie.load('basket') != undefined){
+            if (cookie.load('basket').length != 0 && this.props.Store.basket.length == 0){
+                cookie.load('basket').map((item, index) => {
+                    this.props.addBasket(item)
+                })
+                this.price()
+            }
+        }
+        if(cookie.load('form') != undefined){
+            if (this.props.Store.form.fio == undefined){
+                this.props.form(cookie.load('form'))
+            }
+        }
+        setTimeout(()=>{
             let n = 0;
             this.props.Store.basket.map((item, index) => {
                 if (item.call == undefined){
@@ -41,15 +70,20 @@ class Payment extends Component{
     }
     end(){
         let basket = ''
+        const l = this.props.Store.basket.length - 1
         this.props.Store.basket.map((item, index)=>{
-            basket = basket + `{"item_id": ${item.item_id},"item_size": ${item.width},"item_count": ${item.call}},`
+            if (index != l) {
+                basket = basket + `{"item_id":${item.item_id},"item_size":"${item.width}","item_count":${item.call == undefined ? '1' : item.call}},`
+            } else if (index == l) {
+                basket = basket + `{"item_id":${item.item_id},"item_size":"${item.width}","item_count":${item.call == undefined ? '1' : item.call}}`
+            }
         })
-        let user = `{"name": "${this.props.Store.form.fio}","phone": "${this.props.Store.form.phone}","comment": "${this.props.Store.form.comment}","address": {"street": "${this.props.Store.form.sity}","house": "${this.props.Store.form.home}","office": "${this.props.Store.form.apartment}","comment": "${this.props.Store.form.note}"},"delivery_time": "14.05.2017 16:30","has_birthday": true,"payment_method": "${this.state.type}","need_change": "5000"`
-        let resultUrl = `http://dev.kaerus.ru/Pwa/checkout.json?commands=[{"data": {"cart": [${basket}],"user": ${user},"client_id": "81dc9bdb52d04dc20036dbd8313ed055","platform": "1"}}]`
+        let user = `{"name":"${this.props.Store.form.fio}","phone":"${this.props.Store.form.phone}","comment":"${this.props.Store.form.comment}","address":{"street":"${this.props.Store.form.sity}","house":"${this.props.Store.form.home}","office":"${this.props.Store.form.apartment}","comment":"${this.props.Store.form.note}"},"delivery_time":"${this.props.Store.form.time}","has_birthday":${this.props.Store.form.dr},"payment_method":"${this.state.type == 'type1' ? 'cash' : 'card'}","need_change":"5000"}`
+        let resultUrl = `http://dev.kaerus.ru/Pwa/checkout.json?commands=[{"data":{"cart":[${basket}],"user":${user},"client_id":"81dc9bdb52d04dc20036dbd8313ed055","platform":"6"}}]`
         console.log(resultUrl)
         axios.get(resultUrl)
         .then((response) => {
-            browserHistory.push('/payment')
+            browserHistory.push('/end')
         })
         .catch((error) => {console.log(error)})
     }
@@ -109,5 +143,9 @@ export default connect(
   state => ({
     Store: state
   }),
-  dispatch =>({})
+  dispatch =>({
+    addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
+    price:(price) => {dispatch({type:'PRICE', payload:price})},
+    form:(form) => {dispatch({type:'FORM', payload:form})}
+  })
 )(Payment)

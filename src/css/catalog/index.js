@@ -5,7 +5,8 @@ export default StyleSheet.create({
         width:'50%',
         float:'left',
         padding:'2.5px',
-        position:'relative'
+        position:'relative',
+        marginBottom:5
     },
     catalogRow:{
         marginLeft:'-2.5px',
@@ -13,7 +14,7 @@ export default StyleSheet.create({
     },
     itemBlock:{
         width:'100%',
-        height:'120px',
+        height:'initial',
         borderRadius:'5px',
         backgroundSize:'cover',
         backgroundPosition: 'center',
@@ -24,8 +25,6 @@ export default StyleSheet.create({
         zIndex:1
     },
     blockImage:{
-        opacity:.3,
-        position:'absolute',
         width:'calc(100% - 5px)'
     },
     catalogBlock:{
@@ -48,6 +47,10 @@ export default StyleSheet.create({
         margin:'0',
         minWidth:'63px',
         textAlign:'center',
-        fontFamily:'GothamPro-Medium, sans-serif'
+        fontFamily:'GothamPro-Medium, sans-serif',
+        marginTop:7
+    },
+    link:{
+        display:'block'
     }
 })

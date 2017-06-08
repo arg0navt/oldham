@@ -6,8 +6,13 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import OrderPanel from '../../ui/catalogPanel/panelOrder'
 import moment from 'moment';
+import cookie from 'react-cookies'
+import _ from 'underscore'
+import InputMoment from 'input-moment'
+import 'input-moment/dist/input-moment.css'
 
 const now = moment().hour(0).minute(0);
+moment.locale('ru');
 
 class Order extends Component{
     constructor(props){
@@ -23,17 +28,54 @@ class Order extends Component{
             apartment:'',
             note:'',
             defer:false,
-            dr:false
+            dr:false,
+            time:moment()
         }
     }
-    componentDidMount(){
+    price(){
+        let price = 0
         setTimeout(()=>{
-            const url = this.props.location.pathname
-            const urlArr = url.split('/')
-            const first = urlArr[1]
-            this.setState({
-                url: first
+            this.props.Store.basket.map((item, index) => {
+                if (item.width == 30){
+                    if (item.call != undefined){
+                        price = price + parseFloat(item.item_price) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_price)
+                    }
+                } else if (item.width == 40){
+                    if (item.call != undefined){
+                        price = price + (parseFloat(item.item_price) + parseFloat(item.item_size_m_price)) * parseFloat(item.call)
+                    } else {
+                        price = price + parseFloat(item.item_price) + parseFloat(item.item_size_m_price)
+                    } 
+                }
             })
+            this.props.price(price)
+        },10)
+    }
+    componentDidMount(){
+        if(cookie.load('basket') != undefined){
+            if (cookie.load('basket').length != 0 && this.props.Store.basket.length == 0){
+                cookie.load('basket').map((item, index) => {
+                    this.props.addBasket(item)
+                })
+                this.price()
+            }
+        }
+        if(cookie.load('form') != undefined){
+            if (this.props.Store.form.fio == undefined){
+                this.setState({
+                    phone:cookie.load('form').phone,
+                    fio:cookie.load('form').fio,
+                    comment:cookie.load('form').comment,
+                    sity:cookie.load('form').sity,
+                    home:cookie.load('form').home,
+                    apartment:cookie.load('form').apartment,
+                    note:cookie.load('form').note,
+                })
+            }
+        }
+        setTimeout(()=>{
             let n = 0;
             this.props.Store.basket.map((item, index) => {
                 if (item.call == undefined){
@@ -47,12 +89,6 @@ class Order extends Component{
     }
     componentWillReceiveProps(nextProps){
         setTimeout(()=>{
-            const url = nextProps.location.pathname
-            const urlArr = url.split('/')
-            const first = urlArr[1]
-            this.setState({
-                url: first
-            })
             let n = 0;
             this.props.Store.basket.map((item, index) => {
                 if (item.call == undefined){
@@ -80,6 +116,14 @@ class Order extends Component{
         this.setState({
             dr:!this.state.dr
         })
+    }
+    newDate(m){
+        this.setState({time:m})
+    }
+    disabledHours(){
+        const day = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        const h = _.filter(day, function(num){ return num < moment().hour() + 1})
+        return h
     }
     render(){
         return(
@@ -132,7 +176,10 @@ class Order extends Component{
                         {this.state.defer == true ? (
                             <div>
                                 <p className={css(order.deferP)}>Дата доставки</p>
-                                <div className={css(order.timeWr)}><TimePicker defaultValue={now} /></div>
+                                <div className={css(order.timeWr)}>
+                                    <input type="text" className={css(order.deferInput)} value={this.state.time.format("MM.DD.YYYY / HH:mm")} readOnly/>
+                                    <InputMoment moment={this.state.time} onChange={this.newDate.bind(this)}/>
+                                </div>
                             </div>
                         ) : (
                             <div></div>
@@ -155,5 +202,8 @@ export default connect(
   state => ({
     Store: state
   }),
-  dispatch =>({})
+  dispatch =>({
+    addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
+    price:(price) => {dispatch({type:'PRICE', payload:price})}
+  })
 )(Order)

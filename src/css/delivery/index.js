@@ -18,7 +18,7 @@ export default StyleSheet.create({
         width:285,
         borderRadius:10,
         margin:'auto',
-        background:'url(/img/icon/delivery/map.png) #222222 no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/map.png) #222222 no-repeat center`,
         marginTop:15
     },
     it:{
@@ -60,7 +60,7 @@ export default StyleSheet.create({
         width:'calc(100% + 30px)',
         marginLeft:-15,
         height:73,
-        background:'url(/img/icon/delivery/map.png) #222222 no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/map.png) #222222 no-repeat center`,
         marginTop:40,
         marginBottom:40
     },
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         fontFamily:'GothamPro-Medium',
         lineHeight:'73px',
         margin:0,
-        background:'url(/img/icon/up.png) no-repeat center right 15px',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat center right 15px`,
         backgroundSize:16
     },
     fullTextImg:{

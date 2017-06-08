@@ -16,7 +16,7 @@ export default StyleSheet.create({
         fontSize:'14px',
         color:'#fff',
         paddingLeft:'25px',
-        background:'url(/img/icon/sity.png) no-repeat center left / 16px',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/sity.png) no-repeat center left / 16px`,
         margin:'0',
         lineHeight:'44px'
     },

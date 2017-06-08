@@ -81,6 +81,17 @@ export default StyleSheet.create({
         paddingLeft:30,
         paddingRight:30
     },
+    deferInput:{
+        width:'100%',
+        height:45,
+        border:0,
+        padding:0,
+        paddingRight:15,
+        borderBottom:'1px solid #585b60',
+        background:'rgba(0,0,0,0)',
+        color:'#fff',
+        textAlign:'left'
+    },
     defer:{
         width:'100%',
         overflow:'hidden'
@@ -92,7 +103,6 @@ export default StyleSheet.create({
         color:'#4f545a',
         fontFamily: 'GothamPro-Medium',
         fontSize:12,
-        paddingLeft:39,
         marginBottom:5
     },
     timeWr:{

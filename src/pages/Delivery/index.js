@@ -14,7 +14,7 @@ class Delivery extends Component{
                     <div className={css(d.itemBlock)}>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-1.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-1.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>Бесплатная доставка</p>
@@ -23,7 +23,7 @@ class Delivery extends Component{
                         </div>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-2.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-2.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>49 минут</p>
@@ -32,7 +32,7 @@ class Delivery extends Component{
                         </div>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-3.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-3.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>с 10 до 02 часов</p>
@@ -42,14 +42,14 @@ class Delivery extends Component{
                     </div>
                 </div>
                 <div className={css(d.fullBlock)}>
-                    <p className={css(d.fullText)}><img className={css(d.fullTextImg)} src="/img/icon/delivery/icon-8.png" alt=""/>Карта доставки</p>
+                    <p className={css(d.fullText)}><img className={css(d.fullTextImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-8.png`} alt=""/>Карта доставки</p>
                 </div>
                 <div className={css(d.item)}>
                     <p className={css(d.itemTextOne)}>Способы доставки</p>
                     <div className={css(d.itemBlock)}>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-4.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-4.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>Доставка курьером</p>
@@ -58,7 +58,7 @@ class Delivery extends Component{
                         </div>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-5.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-5.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>Забрать из ресторана</p>
@@ -67,7 +67,7 @@ class Delivery extends Component{
                         </div>
                         <div className={css(d.it)}>
                             <div className={css(d.itLeft)}>
-                                <img className={css(d.itLeftImg)} src="/img/icon/delivery/icon-3.png" alt=""/>
+                                <img className={css(d.itLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-3.png`} alt=""/>
                             </div>
                             <div className={css(d.itRight)}>
                                 <p className={css(d.pOne)}>К определенному времени</p>
@@ -81,14 +81,14 @@ class Delivery extends Component{
                     <div className={css(d.bottomWrap)}>
                         <div className={css(d.bottomItem)}>
                             <div className={css(d.bottomItemPich)}>
-                                <img className={css(d.bottomItemImg)} style={{width:31}} src="/img/icon/delivery/icon-6.png" alt=""/>
+                                <img className={css(d.bottomItemImg)} style={{width:31}} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-6.png`} alt=""/>
                             </div>
                             <p className={css(d.bottomItemPOne)}>Наличными</p>
                             <p className={css(d.bottomItemPTwo)}>Вы можете оплатить заказ наличными курьеру или при получении в ресторане</p>
                         </div>
                         <div className={css(d.bottomItem)}>
                             <div className={css(d.bottomItemPich)}>
-                                <img className={css(d.bottomItemImg)} style={{width:36}} src="/img/icon/delivery/icon-7.png" alt=""/>
+                                <img className={css(d.bottomItemImg)} style={{width:36}} src={`${process.env.PUBLIC_URL}/img/icon/delivery/icon-7.png`} alt=""/>
                             </div>
                             <p className={css(d.bottomItemPOne)}>Банковской картой</p>
                             <p className={css(d.bottomItemPTwo)}>Пожалуйста, предупредите нас, если хотите оплатить заказ банковской картой</p>

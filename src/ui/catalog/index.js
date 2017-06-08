@@ -4,30 +4,29 @@ import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
 import catalog from '../../css/catalog'
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios'
-import { url } from '../../config/url'
+import { url, API } from '../../config/url'
+import RetinaImage from 'react-retina-image'
 
 
 const CatalogItem = ({img, icon, text, link, width}) => (
     <div className={css(catalog.itemCol)}>
-        <Link to={'/catalog' + link}>
-        <div className={css(catalog.itemBlock, catalog.blockImage)} style={{backgroundImage:'url(' + img + ')'}}>
-        </div>
-        <div className={css(catalog.itemBlock, catalog.itemText)}>
-            <div className={css(catalog.icon)}>
-                <div className={css(catalog.iconWrap)}>
-                    <p className={css(catalog.iconText)}>{text}</p>
-                </div>
-            </div>
-        </div>
+        <Link className={css(catalog.link)} to={'/catalog' + link}>
+        <img className={css(catalog.itemBlock, catalog.blockImage)} src={img} />
         </Link>
     </div>
 )
 
 export default class Slider extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            url:API('Pwa','getCategories')
+        }
+    }
     render(){
         return(
             <div className={css(catalog.catalogBlock)}>
-                    <Get url={`${url.url}?commands=[{%22data%22:{%22client_id%22:%22${url.userId}%22,%22platform%22:%221%22}}]`}>
+                    <Get url={this.state.url}>
                         {(error, response, isLoading) => {
                             if(error) {
                                 return (<div>Something bad happened: {error.message}</div>)
@@ -36,7 +35,7 @@ export default class Slider extends Component{
                                     <div>
                                         {response.data[0].result.map((item, index) => {
                                             return(
-                                                <CatalogItem key={index} img={`http://dev.kaerus.ru/uploads/${item.catalog_image_340x240}`} text={item.category_name} link={
+                                                <CatalogItem icon={`http://dev.kaerus.ru/uploads/${item.catalog_image_icon}`} key={index} img={`http://dev.kaerus.ru/uploads/${item.catalog_image_340x240}`} text={item.category_name} link={
                                                     item.category_name == 'Пицца' ?
                                                         '/pizza' :
                                                     item.category_name == 'Суши и роллы' ?

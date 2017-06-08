@@ -9,9 +9,8 @@ export default StyleSheet.create({
     line:{
         width:'100%',
         height:'8px',
-        background:'#f89a91',
+        background:'rgba(255,255,255,.2)',
         borderRadius:'8px',
-        border:'2px solid #f89a91'
     },
     lineProgressWrap:{
         position:'absolute',
@@ -23,37 +22,52 @@ export default StyleSheet.create({
     },
     lineProgress:{
         height:'4px',
+        borderRadius:'4px',
+        float:'left'
+    },
+    lin:{
+        height:'4px',
         background:'#e74b3b',
-        borderRadius:'4px'
+    },
+    items:{
+        width:'102%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent:'space-between',
+        flexDirection:'row',
+        alignItems:'center',
     },
     item:{
-        position:'absolute',
         marginTop:'-12px',
-        ':nth-of-type(2)':{
-            left:'calc(33.3% - 8px)'
-        },
-        ':nth-of-type(3)':{
-            left:'calc(66.6% - 8px)'
-        },
-        ':nth-of-type(4)':{
-            left:'calc(100% - 16px)'
+        opacity:'.6',
+        ':last-child':{
+
         }
     },
     circle:{
-        width:'16px',
-        height:'16px',
+        width:'18px',
+        height:'18px',
         borderRadius:'50%',
-        background:'#e74b3b',
-        border:'2px solid #f89a91'
+        position:'relative',
+        border:'2px solid rgba(255,255,255,.2)',
+        ':after':{
+            width:'100%',
+            height:'100%',
+            position:'absolute',
+            background:'#e74b3b',
+            content:'""',
+            display:'block',
+            borderRadius:'50%',
+        }
     },
     num:{
         fontSize:'6px',
         position:'relative',
-        marginTop:'-16px',
+        marginTop:'-17px',
         color:'#ffe5e2',
         fontFamily:'GothamPro-Bold, sans-serif',
-        width:'16px',
-        height:'16px',
+        width:'18px',
+        height:'18px',
         lineHeight:'16px',
         textAlign:'center',
         zIndex:'3'
@@ -63,6 +77,8 @@ export default StyleSheet.create({
         color:'#ffe5e2',
         lineHeight:'10px',
         marginTop:'4px',
+        fontFamily:'GothamPro-Bold, sans-serif',
+        position:'absolute',
         '@media (max-width: 350px)': {
             fontSize:'9px'
         }
@@ -70,5 +86,6 @@ export default StyleSheet.create({
     active:{
         color:'#fff',
         fontFamily:'GothamPro-Bold, sans-serif',
+        opacity:'1'
     }
 })

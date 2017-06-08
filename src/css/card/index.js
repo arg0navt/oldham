@@ -20,16 +20,22 @@ export default StyleSheet.create({
     },
     cardTop:{
         width:'100%',
-        paddingLeft:'15px',
         paddingRight:'15px',
-        paddingTop:'15px'
+        paddingTop:'15px',
+        '@media (max-width: 365px)': {
+            paddingTop:'10px',
+        }
     },
     cardLogo:{
-        width:'40%',
+        width:'38%',
         float:'left',
+        height:60,
+        '@media (max-width: 365px)': {
+            width:'40%'
+        }
     },
     cardLogoImg:{
-        width:'60%',
+        width:'62%',
         display:'block',
         margin:'auto',
     },
@@ -50,10 +56,14 @@ export default StyleSheet.create({
         color:'#fff',
         fontFamily:'GothamPro-Bold, sans-serif',
         margin:'0',
-        background: 'url(/img/icon/up.png) no-repeat right',
+        background: `url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat right`,
         backgroundSize: '16px',
-        '@media (max-width: 350px)': {
-            fontSize:'14px'
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        paddingRight:30,
+        overflow:'hidden',
+        '@media (max-width: 365px)': {
+            fontSize:'11px'
         }
     },
     cardScore:{
@@ -61,26 +71,29 @@ export default StyleSheet.create({
         fontSize:'11px',
         color:'#fff',
         lineHeight:'1',
-        '@media (max-width: 350px)': {
-            fontSize:'9px'
+        '@media (max-width: 365px)': {
+            fontSize:'8px'
         }
     },
     cardScoreActive:{
         fontSize:'16px',
-        '@media (max-width: 350px)': {
-            fontSize:'12px'
+        '@media (max-width: 365px)': {
+            fontSize:'10px'
         }
     },
     cardBottom:{
-        width:'100%',
+        width:'calc(100% - 8px)',
         height:'65px',
-        background:'#141414',
         paddingLeft:'15px',
         paddingRight:'15px',
         position:'absolute',
-        bottom:'30px',
-        '@media (max-width: 350px)': {
+        bottom:'18%',
+        margin:'auto',
+        left:0,
+        right:0,
+        '@media (max-width: 365px)': {
             height: '50px',
+            bottom:'20%'
         }
     },
     cardBottomLeft:{
@@ -91,13 +104,13 @@ export default StyleSheet.create({
         fontSize:'12px',
         color:'#fff',
         lineHeight:'1',
-        '@media (max-width: 350px)': {
+        '@media (max-width: 365px)': {
             fontSize:'10px'
         }
     },
     cardBottomNumAction:{
         fontSize:'32px',
-        '@media (max-width: 350px)': {
+        '@media (max-width: 365px)': {
             fontSize:'25px'
         }
     },
@@ -112,7 +125,7 @@ export default StyleSheet.create({
         border:'1px solid #fff',
         borderRadius:'4px',
         marginTop:'11px',
-        '@media (max-width: 350px)': {
+        '@media (max-width: 365px)': {
             height:'38px',
             marginTop:'6px'
         }
@@ -129,7 +142,7 @@ export default StyleSheet.create({
         ':nth-of-type(1)':{
             borderRight:'1px solid #fff'
         },
-        '@media (max-width: 350px)': {
+        '@media (max-width: 365px)': {
             height:'37px',
             fontSize:'7px'
         }
@@ -142,9 +155,52 @@ export default StyleSheet.create({
         margin:'auto',
         marginTop:'2px',
         fontFamily:'GothamPro-Bold, sans-serif',
-        '@media (max-width: 350px)': {
+        '@media (max-width: 365px)': {
             fontSize:'9px',
             width:'60px'
         }
+    },
+    cardProcent:{
+        width:'70%',
+        display:'block',
+        margin:'auto',
+    },
+    procentSpan:{
+        fontSize:35,
+        color:'#fff',
+        textAlign:'center',
+        position:'absolute',
+        width:'100%',
+        lineHeight: '1.7',
+        '@media (max-width: 365px)': {
+            fontSize:24,
+        },
+    },
+    procentText:{
+        fontSize:10,
+        color:'#fff',
+        textAlign:'center',
+        fontFamily:'GothamPro-Bold, sans-serif',
+        '@media (max-width: 365px)': {
+            fontSize:9,
+            marginTop:15
+        },
+    },
+    noUserText:{
+        fontSize:10,
+        color:'#fff',
+        marginTop:4
+    },
+    noUserButton:{
+        display:'block',
+        border:'1px solid #fff',
+        height:30,
+        borderRadius: 5,
+        width: 140,
+        textAlign: 'center',
+        fontSize: 10,
+        color: '#fff',
+        lineHeight: '27px',
+        fontFamily: 'GothamPro-Bold, sans-serif'
     }
 })

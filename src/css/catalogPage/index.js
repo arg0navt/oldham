@@ -4,13 +4,14 @@ export default StyleSheet.create({
     tabBlock:{
         width:'100%',
         height:46,
-        background:'#111111',
+        background:`url(${process.env.PUBLIC_URL}/img/bg.jpg) repeat-y`,
+        backgroundSize:'contain',
         overflow:'hidden',
         position:'fixed',
         top:60,
         left:0,
-        boxShadow:'40px 0 141px rgba(0,0,0,.75)',
-        zIndex:10
+        boxShadow:'inset 20px 20px 50px rgba(0,0,0,.2), 40px 0 141px rgba(0,0,0,.75)',
+        zIndex:10,
     },
     tabItem:{
         transform: 'translate3d(146.5px, 0px, 0px)',
@@ -82,7 +83,6 @@ export default StyleSheet.create({
         fontSize:12,
         color:'#ffffff',
         marginTop:0,
-        height: '28px',
         whiteSpace:'initial',
         overflow: 'hidden',
         lineHeight:'1.1'
@@ -143,7 +143,7 @@ export default StyleSheet.create({
         width:'100%',
         height:63,
         overflow:'hidden',
-        background:'url(/img/bottom.jpg) no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/bottom.jpg) no-repeat center`,
         position:'fixed',
         bottom:0,
         left:0,
@@ -169,7 +169,7 @@ export default StyleSheet.create({
         fontSize:11,
         marginTop:0,
         marginBottom:0,
-        lineHeight:'21px'
+        lineHeight:'21px',
     },
     bottomTextTwoSpan:{
         fontSize:21,
@@ -177,16 +177,17 @@ export default StyleSheet.create({
     },
     iconKorz:{
         paddingLeft:55,
-        background:'url(/img/icon/korz.png) no-repeat 15px center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/korz.png) no-repeat 15px center`,
         backgroundSize:23,
     },
     border:{
-        background:'url(/img/icon/up.png) no-repeat 155px center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat right 15px center`,
         backgroundSize:16,
         borderLeft:'1px solid #ab2e20',
+        textAlign:'right',
+        paddingRight:45
     },
     numItem:{
-        display:'none',
         marginTop:0,
         height:24,
         width:81,
@@ -232,7 +233,7 @@ export default StyleSheet.create({
         color:'#ffffff',
         fontFamily: 'GothamPro-Bold',
         textAlign:'center',
-        background:'url(/img/icon/up.png) no-repeat center right 15px',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat center right 15px`,
         width: '100%',
         display: 'block',
         lineHeight:'63px',

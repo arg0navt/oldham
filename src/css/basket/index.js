@@ -13,7 +13,7 @@ export default StyleSheet.create({
         overflow:'hidden',
         paddingLeft:15,
         paddingRight:15,
-        background:'url(/img/icon/up.png) no-repeat center right 15px',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat center right 15px`,
         backgroundSize:16
     },
     avtorizationsText:{

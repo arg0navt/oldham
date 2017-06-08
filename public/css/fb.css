@@ -1,0 +1,17 @@
+.kep-login-facebook{
+    opacity: 1 !important;
+    border:2px solid #3b5998 !important;
+    background:url(../img/icon/fb.png) no-repeat 25px #3b5998 !important;
+    color:#fff !important;
+    background-size: 18px !important;
+    font-family: 'GothamPro-Bold' !important;
+    width:90% !important;
+    margin:auto !important;
+    text-indent: 22px !important;
+    display: block !important;
+    text-transform: inherit !important;
+    transition: none !important;
+    border-radius: 7px !important;
+    padding: 0 !important;
+    height: 50px !important;
+}

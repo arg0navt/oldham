@@ -10,13 +10,14 @@ export default StyleSheet.create({
         }
     },
     content:{
-        paddingTop:'75px',
+        paddingTop:'60px',
         paddingLeft:'15px',
         paddingRight:'15px',
         paddingBottom:'30px',
         overflow:'hidden',
         margin:'auto',
-        width:'100%'
+        width:'100%',
+        minHeight:'100vh'
     },
     contentPadding:{
         paddingBottom:85,
@@ -44,7 +45,7 @@ export default StyleSheet.create({
     minus:{
         width:31,
         height:28,
-        background:'url(/img/icon/minus.png) #e64b3b no-repeat center center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/minus.png) #e64b3b no-repeat center center`,
         textAlign:'center',
         color:'#ffffff',
         lineHeight:'28px',
@@ -54,7 +55,7 @@ export default StyleSheet.create({
     plus:{
         width:31,
         height:28,
-        background:'url(/img/icon/plus.png) #e64b3b no-repeat center center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/plus.png) #e64b3b no-repeat center center`,
         textAlign:'center',
         color:'#ffffff',
         lineHeight:'28px',

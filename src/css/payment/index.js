@@ -56,7 +56,7 @@ export default StyleSheet.create({
         height:40,
         display:'block',
         margin:'auto',
-        background:'url(/img/icon/delivery/type1.png) no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/type1.png) no-repeat center`,
         backgroundSize:'contain',
         marginTop:15
     },
@@ -65,15 +65,15 @@ export default StyleSheet.create({
         height:40,
         display:'block',
         margin:'auto',
-        background:'url(/img/icon/delivery/type2.png) no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/type2.png) no-repeat center`,
         backgroundSize:'contain',
         marginTop:15
     },
     typeImg1Active:{
-        background:'url(/img/icon/delivery/type1_a.png) no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/type1_a.png) no-repeat center`,
     },
     typeImg2Active:{
-        background:'url(/img/icon/delivery/type2_a.png) no-repeat center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/delivery/type2_a.png) no-repeat center`,
     },
     itemType:{
         fontSize:12,

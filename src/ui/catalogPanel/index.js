@@ -54,6 +54,10 @@ class CatalogPanel extends Component {
             this.setState({length:n})
         },10)
     }
+    goOrder(){
+        browserHistory.push('/order')
+        window.scrollTo(0,0)
+    }
     render(){
         return(
             <div>
@@ -78,7 +82,7 @@ class CatalogPanel extends Component {
                     </div>
                 ) : this.props.Store.basket.length > 0 && this.state.url == 'basket' ? (
                     <div className={css(c.bottom)}>
-                        <Link to="/order" className={css(c.nextOrder)}>Продолжить</Link>
+                        <Link onClick={this.goOrder.bind(this)} className={css(c.nextOrder)}>Продолжить</Link>
                     </div> 
                 ) : (<div></div>)}
             </div>

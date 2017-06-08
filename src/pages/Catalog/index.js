@@ -91,10 +91,10 @@ class Catalog extends Component{
             x: -(window.innerWidth * this.state.n),
             marginTab: window.innerWidth/2 - document.querySelector('.tabLinkActive').offsetLeft - heightItem/2
         })
-    },500)
+    },700)
     setTimeout(()=>{
             this.setState({tabShow:true})
-        },800)
+        },900)
     }
     listSwipe(ev){
         if(ev.deltaX < 0){
@@ -129,9 +129,9 @@ class Catalog extends Component{
                     }
                 } else if (item.width == 40){
                     if (item.call != undefined){
-                        price = price + parseFloat(item.item_size_m_price) * parseFloat(item.call)
+                        price = price + (parseFloat(item.item_price) + parseFloat(item.item_size_m_price)) * parseFloat(item.call)
                     } else {
-                        price = price + parseFloat(item.item_size_m_price)
+                        price = price + parseFloat(item.item_price) + parseFloat(item.item_size_m_price)
                     } 
                 }
             })
@@ -139,11 +139,13 @@ class Catalog extends Component{
         },10)
     }
     componentWillMount(){
-        if (cookie.load('basket') != []){
-            cookie.load('basket').map((item, index) => {
-                this.props.addBasket(item)
-            })
-            this.price()
+        if(cookie.load('basket') != undefined){
+            if (cookie.load('basket').length != 0 && this.props.Store.basket.length == 0){
+                cookie.load('basket').map((item, index) => {
+                    this.props.addBasket(item)
+                })
+                this.price()
+            }
         }
     }
     render(){

@@ -123,7 +123,7 @@ class Navigation extends Component{
                 <div className={this.props.Store.nav == false ? css(nav.nav) : css([nav.nav, nav.navActive])} style={this.props.Store.nav == true ? {left:this.state.x} : {}}>
                 <div className={css(login.avtorization)}>
                     <Link onClick={this.close.bind(this)} to="/">
-                        <img src="/img/icon/nav/logo_nav.png" style={{width:'70px',margin:'auto',display:'block'}} alt=""/>
+                    <img src={`${process.env.PUBLIC_URL}/img/icon/nav/logo_nav.png`} style={{width:'70px',margin:'auto',display:'block'}} alt=""/>
                     </Link>
                 </div>
                 <ul className={css(nav.ul)}>

@@ -8,7 +8,7 @@ import global from '../../css/global';
 import styleHeader from '../../css/header';
 
 const NavButton = ({click}) => <div onClick={click} className={css(styleHeader.buttonNav)}></div>
-const Logo = () => <Link to="/"><div className={css(styleHeader.logo)}><img className={css(global.img)} src="/img/icon/logo.png" /></div></Link>
+const Logo = () => <Link to="/"><div className={css(styleHeader.logo)}></div></Link>
 const Shop = ({length}) => <div className={css(styleHeader.buttonShop)}>{length > 0 ? <div className={css(styleHeader.numShop)}></div> : <div></div>}</div>
 
 class Header extends Component{
@@ -21,7 +21,7 @@ class Header extends Component{
                             <NavButton click={this.props.toggleNav} />
                         ) : (
                             <div className={css(styleHeader.back)} onClick={browserHistory.goBack}>
-                                <img className={css(styleHeader.backImg)} src="/img/icon/back.png" alt=""/>
+                                <img className={css(styleHeader.backImg)} src={`${process.env.PUBLIC_URL}/img/icon/back.png`} alt=""/>
                             </div>
                         )}
                     </Col>
@@ -35,7 +35,7 @@ class Header extends Component{
                     </Col>
                 </Row>
                 <div className={this.props.status == "hide" ? css(styleHeader.back) : css(styleHeader.hide)}>
-                    <img className={css(styleHeader.backImg)} src="/img/icon/back.png" alt=""/>
+                    <img className={css(styleHeader.backImg)} src={`${process.env.PUBLIC_URL}/img/icon/back.png`} alt=""/>
                 </div>
             </header>
         )

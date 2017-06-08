@@ -11,9 +11,10 @@ class Item extends Component{
     constructor(props){
         super(props)
         this.state = {
-            num: 1,
+            num: 0,
             width: 30,
-            link:''
+            link:'',
+            num40:0
         }
     }
     price(){
@@ -28,9 +29,9 @@ class Item extends Component{
                     }
                 } else if (item.width == 40){
                     if (item.call != undefined){
-                        price = price + parseFloat(item.item_size_m_price) * parseFloat(item.call)
+                        price = price + (parseFloat(item.item_price) + parseFloat(item.item_size_m_price)) * parseFloat(item.call)
                     } else {
-                        price = price + parseFloat(item.item_size_m_price)
+                        price = price + parseFloat(item.item_price) + parseFloat(item.item_size_m_price)
                     } 
                 }
             })
@@ -39,42 +40,48 @@ class Item extends Component{
     }
     sum(){
         this.setState({num: this.state.num + 1})
-        this.props.more(this.props.item)
+        this.props.more({...this.props.item, width:30})
         this.price()
     }
     sub(){
         if(this.state.num > 1){
             this.setState({num:this.state.num - 1})
-            this.props.sub(this.props.item)
+            this.props.sub({...this.props.item, width:30})
             this.price()
+        } else if (this.state.num == 1){
+            this.setState({num:0})
+            this.props.delete({...this.props.item, width:30})
+        }
+    }
+    sum40(){
+        this.setState({num40: this.state.num40 + 1})
+        this.props.more40({...this.props.item, width:40})
+        this.price()
+    }
+    sub40(){
+        if(this.state.num40 > 1){
+            this.setState({num40:this.state.num40 - 1})
+            this.props.sub40({...this.props.item, width:40})
+            this.price()
+        } else if (this.state.num40 == 1){
+            this.setState({num40:0})
+            this.props.delete({...this.props.item, width:40})
         }
     }
     add(){
-        this.props.addBasket(this.props.item)
         setTimeout(()=>{
             if (this.state.width == 30){
-                this.props.width30(this.props.item)
+                this.setState({num:1})
+                this.props.addBasket({...this.props.item, width:30})
             } else if (this.state.width == 40){
-                this.props.width40(this.props.item)
+                this.setState({num40:1})
+                this.props.addBasket({...this.props.item, width:40})
             }
         },10)
         this.price()
-        this.start.style.cssText = 'display:none'
-        this.numWrap.style.cssText = 'display:block'
     }
     widthW(width){
         this.setState({width: width})
-        const n = _.findLastIndex(this.props.Store.basket, (item) => { return item.item_id == this.props.item.item_id })
-        if ( n != -1 ){
-            setTimeout(()=>{
-                if (this.state.width == 30){
-                    this.props.width30(this.props.item)
-                } else if (this.state.width == 40){
-                    this.props.width40(this.props.item)
-                }
-                this.price()
-            },10)    
-        } 
     }
     componentDidMount(){
         if (this.props.item.category_name == 'Пицца'){
@@ -96,6 +103,26 @@ class Item extends Component{
         } else if (this.props.item.category_name == 'Супы'){
             this.setState({link:'sup'})
         }
+        const found = _.filter(this.props.Store.basket, (item) => { return item.item_id == this.props.item.item_id; })
+        if (found.length != [] ){
+            found.map((item, index) => {
+                if (item.width == 30){
+                    setTimeout(()=>{
+                        this.setState({
+                            num: item.call || 1,
+                            width:30
+                        })
+                    },10)
+                } else {
+                    setTimeout(()=>{
+                        this.setState({
+                            num40: item.call || 1,
+                            width:40
+                        })
+                    },10)
+                }
+            })
+        }
     }
     render(){
         return(
@@ -116,18 +143,35 @@ class Item extends Component{
                             <div onClick={this.widthW.bind(this, 30)} className={this.state.width == 30 ? css(c.widthItem, c.widthItemActive) : css(c.widthItem)}>30 см</div>
                             <div onClick={this.widthW.bind(this, 40)} className={this.state.width == 40 ? css(c.widthItem, c.widthItemActive) : css(c.widthItem)}>40 см</div>
                         </div>
-                    ) : (<div></div>)}
-                    <div className={css(c.num)} ref={(start) => this.start = start}>
+                    ) : (<div style={{display:'none'}}></div>)}
+                    {this.state.num < 1 && this.state.width == 30 ? (
+                        <div className={css(c.num)} ref={(start) => this.start = start}>
                         <div className={css(c.start)}>
-                            <div className={css(c.price)}>{this.state.width == 30 ? this.props.item.item_price : this.props.item.item_size_m_price} ₽</div>
+                            <div className={css(c.price)}>{this.props.item.item_price} ₽</div>
                             <div className={css(c.plus)} onClick={this.add.bind(this)}>+</div>
                         </div>
                     </div>
-                    <div className={css(global.uiNum, c.numItem)} ref={(numWrap) => this.numWrap = numWrap}>
-                        <div onClick={this.sub.bind(this)} className={css(global.minus, c.minus)}></div>
-                        <input className={css(global.input, c.input)} type="text" value={this.state.num} />
-                        <div onClick={this.sum.bind(this)} className={css(global.plus, c.plus)}></div>
-                    </div>
+                    ) : this.state.num40 < 1 && this.state.width == 40 ? (
+                        <div className={css(c.num)} ref={(start) => this.start = start}>
+                            <div className={css(c.start)}>
+                                <div className={css(c.price)}>{parseFloat(this.props.item.item_price) + parseFloat(this.props.item.item_size_m_price)} ₽</div>
+                                <div className={css(c.plus)} onClick={this.add.bind(this)}>+</div>
+                            </div>
+                        </div>
+                    ) :(<div style={{display:'none'}}></div>)}
+                    {this.state.num >= 1 && this.state.width == 30 ? (
+                        <div className={css(global.uiNum, c.numItem)} ref={(numWrap) => this.numWrap = numWrap}>
+                            <div onClick={this.sub.bind(this)} className={css(global.minus, c.minus)}></div>
+                            <input className={css(global.input, c.input)} type="text" value={this.state.num} />
+                            <div onClick={this.sum.bind(this)} className={css(global.plus, c.plus)}></div>
+                        </div>
+                    ) : this.state.num40 >= 1 && this.state.width == 40 ? (
+                        <div className={css(global.uiNum, c.numItem)} ref={(numWrap) => this.numWrap = numWrap}>
+                            <div onClick={this.sub40.bind(this)} className={css(global.minus, c.minus)}></div>
+                            <input className={css(global.input, c.input)} type="text" value={this.state.num40} />
+                            <div onClick={this.sum40.bind(this)} className={css(global.plus, c.plus)}></div>
+                        </div>
+                    ) : (<div style={{display:'none'}}></div>)}
                 </div>
             </div>
         )
@@ -141,9 +185,10 @@ export default connect(
     addBasket: (item) => {dispatch({type:'ADD_BASKET', payload:item})},
     more:(item) => {dispatch({type:'MORE', payload:item})},
     sub:(item) => {dispatch({type:'SUB', payload:item})},
-    width30:(item) => {dispatch({type:'WIDTH30', payload:item})},
-    width40:(item) => {dispatch({type:'WIDTH40', payload:item})},
-    price:(price) => {dispatch({type:'PRICE', payload:price})}
+    more40:(item) => {dispatch({type:'MORE40', payload:item})},
+    sub40:(item) => {dispatch({type:'SUB40', payload:item})},
+    price:(price) => {dispatch({type:'PRICE', payload:price})},
+    delete:(item) => {dispatch({type:'DELETE', payload:item})}
   })
 )(Item)
 

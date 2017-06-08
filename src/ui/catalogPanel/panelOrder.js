@@ -24,9 +24,11 @@ class CatalogPanel extends Component {
             comment:this.props.comment,
             sity:this.props.sity,
             apartment:this.props.apartment,
-            note:this.props.note
+            note:this.props.note,
+            time:this.props.time,
+            dr:this.props.dr
         }
-        if (this.props.phone != '' && this.props.fio != '' && this.props.home != '' && this.props.comment != '' && this.props.sity != '' && this.props.apartment != '' && this.props.note != ''){
+        if (this.props.phone != ''){
             this.props.form(form)
             browserHistory.push('/payment')
         } else {
@@ -34,36 +36,6 @@ class CatalogPanel extends Component {
                 document.getElementById('phone').classList.add('error')
             } else {
                 document.getElementById('phone').classList.remove('error')
-            }
-            if(this.props.fio == ''){
-                document.getElementById('fio').classList.add('error')
-            } else {
-                document.getElementById('fio').classList.remove('error')
-            }
-            if(this.props.home == ''){
-                document.getElementById('home').classList.add('error')
-            } else {
-                document.getElementById('home').classList.remove('error')
-            }
-            if(this.props.comment == ''){
-                document.getElementById('comment').classList.add('error')
-            } else {
-                document.getElementById('comment').classList.remove('error')
-            }
-            if(this.props.sity == ''){
-                document.getElementById('sity').classList.add('error')
-            } else {
-                document.getElementById('sity').classList.remove('error')
-            }
-            if(this.props.apartment == ''){
-                document.getElementById('apartment').classList.add('error')
-            } else {
-                document.getElementById('apartment').classList.remove('error')
-            }
-            if(this.props.note == ''){
-                document.getElementById('note').classList.add('error')
-            } else {
-                document.getElementById('note').classList.remove('error')
             }
         }
     }

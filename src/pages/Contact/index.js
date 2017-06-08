@@ -14,7 +14,7 @@ export default class Contact extends Component{
                 </div>
                 <div className={css(con.item)}>
                     <div className={css(con.itemLeft)}>
-                        <img className={css(con.itemLeftImg)} src="/img/icon/con1.png" alt=""/>
+                        <img className={css(con.itemLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/con1.png`} alt=""/>
                     </div>
                     <div className={css(con.itemRight)}>
                         <p className={css(con.sity)}>Великий Новгород</p>
@@ -43,7 +43,7 @@ export default class Contact extends Component{
                 </div>
                 <div className={css(con.item)}>
                     <div className={css(con.itemLeft)}>
-                        <img className={css(con.itemLeftImg)} src="/img/icon/con2.png" alt=""/>
+                        <img className={css(con.itemLeftImg)} src={`${process.env.PUBLIC_URL}/img/icon/con2.png`} alt=""/>
                     </div>
                     <div className={css(con.itemRight)}>
                         <p className={css(con.sity)}>Великий Новгород</p>

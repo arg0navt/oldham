@@ -1,4 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important';
+import { url } from '../../config/url'
 
 export default StyleSheet.create({
     hide:{
@@ -31,19 +32,19 @@ export default StyleSheet.create({
         left:'0',
         width:'100%',
         zIndex:'10',
-        background:'url(/img/bg.jpg) repeat-y',
-        backgroundSize:'contain',
+        background:`url(${url.STATIC_SERVER}/assets/${url.CLIENT_ID}/mod_app/home/bg_mainscreen.jpg) no-repeat center -10px`,
+        backgroundSize:'calc(100% + 10px)',
     },
     buttonNav:{
         width:'25px',
         height:'33px',
         display:'inline-block',
-        background:'url(/img/icon/nav.png) no-repeat left center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/nav.png) no-repeat left center`,
         backgroundSize: 'contain',
         cursor:'pointer'
     },
     logo:{
-        width:'45px',
+        width:'105px',
         height:'33px',
         margin:'auto',
         '*img':{
@@ -54,7 +55,7 @@ export default StyleSheet.create({
         width:'26px',
         height:'33px',
         display:'inline-block',
-        background:'url(/img/icon/shop.png) no-repeat left center',
+        background:`url(${process.env.PUBLIC_URL}/img/icon/shop.png) no-repeat left center`,
         backgroundSize: 'contain',
         float:'right',
         position:'relative',

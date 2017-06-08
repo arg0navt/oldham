@@ -6,7 +6,7 @@ export default StyleSheet.create({
         marginLeft:-15,
         marginTop:-75,
         height:'100vh',
-        background:'url(/img/picher/end.png) no-repeat center top',
+        background:`url(${process.env.PUBLIC_URL}/img/picher/end.png) no-repeat center top`,
         backgroundSize:'contain',
         position:'relative'
     },

@@ -5,7 +5,6 @@ import { css } from 'aphrodite/no-important';
 import catalog from '../../css/catalog'
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios'
 import { url, API } from '../../config/url'
-import RetinaImage from 'react-retina-image'
 
 
 const CatalogItem = ({img, icon, text, link, width}) => (

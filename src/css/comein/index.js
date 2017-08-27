@@ -18,7 +18,7 @@ export default StyleSheet.create({
         paddingTop:60
     },
     loginPage:{
-        alignItems:'flex-end',
+        alignItems:'center',
     },
     comeinCenter:{
         width:'100%',
@@ -179,9 +179,10 @@ export default StyleSheet.create({
         boxSizing:'border-box',
         margin:'auto',
         borderRadius:10,
-        display:'none',
         textAlign:'center',
-        transition:'.2s all linear'
+        transition:'.2s all linear',
+        visibility: 'hidden',
+        opacity: 0,
     },
     errorText:{
         color:'#fff',

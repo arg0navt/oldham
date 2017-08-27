@@ -16,7 +16,7 @@ class Registration extends Component{
     constructor(props){
         super(props)
         this.state = {
-            error:''
+            errorText:''
         }
     }
     componentWillReceiveProps(nextProps){

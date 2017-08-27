@@ -57,3 +57,5 @@ export const urlList = {
     registration: '/registration',
     user: '/user'
 };
+
+export const errorTextServer = 'Ошибка от сервера';

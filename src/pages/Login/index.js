@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Recomendation} from '../../ui/recomendation'
 import {CatalogPanel} from '../../ui/catalogPanel'
 import {Link} from 'react-router';
-import {url, API, urlList} from '../../config/url'
+import {url, API, urlList, errorTextServer} from '../../config/url'
 import axios from 'axios'
 import global from '../../css/global'
 import c from '../../css/comein'
@@ -12,8 +12,6 @@ import cookie from 'react-cookies'
 import FacebookLogin from 'react-facebook-login';
 import * as ActionType from '../../config/ActionType';
 import {IndexRoute, IndexRedirect, Router, Route, browserHistory} from 'react-router';
-
-const errorTextServer = 'Ошибка от сервера';
 
 class Login extends Component {
     constructor(props) {
@@ -39,7 +37,7 @@ class Login extends Component {
         axios.get(API('Auth', 'auth', `%22token%22:%22${this.props.Store.token}%22,%22login%22:%22${this.login.value}%22,%22password%22:%22${this.password.value}%22`))
             .then((response) => {
                 if (response.data[0].error) {
-                    this.error(response.data[0].error.message)
+                    this.error(response.data[0].error.message);
                 } else if (response.data[0].result) {
                     this.props.userObj(response.data[0].result.user);
                     location.href = urlList.index;

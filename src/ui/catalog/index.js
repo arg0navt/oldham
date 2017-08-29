@@ -17,7 +17,7 @@ const CatalogItem = ({img, icon, text, link, width}) => (
 
 export default class Slider extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             url:API('Pwa','getCategories')
         }

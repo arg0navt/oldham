@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { css } from 'aphrodite/no-important';
+import React, {Component} from 'react';
+import {css} from 'aphrodite/no-important';
 import AppCss from './css/AppStyle';
 import global from './css/global';
-import { Container, Row, Col } from 'reactstrap';
-import { createStore } from 'redux';
-import { connect } from 'react-redux';
+import {Container, Row, Col} from 'reactstrap';
+import {createStore} from 'redux';
+import {connect} from 'react-redux';
 import {IndexRoute, IndexRedirect, Router, Route, browserHistory} from 'react-router';
 import Home from './pages/Home';
 import AppWrap from './ui/AppWrap';
@@ -28,99 +28,85 @@ import './fonts/GothamPro/styles.css';
 import './fonts/GothamPro-Medium/styles.css';
 import './fonts/GothamPro-Bold/styles.css';
 import './fonts/GothamPro-Italic/styles.css';
-import Swipe from 'react-swipe-component';
-import axios from 'axios';
-import { url, API, titleList, urlList } from './config/url';
-import cookie from 'react-cookies';
+import {url, API, titleList, urlList} from './config/url';
 import * as ActionType from './config/ActionType';
+import UserHOC from './queries/user';
 
 const routes = (
-  <Route path={urlList.index} component={AppWrap}>
-    <IndexRoute component={Home} />
-    <Route path={urlList.catalog} component={Catalog}>
-      <Route path={urlList.pizza} title={titleList.pizza} component={Catalog}></Route>
-      <Route path={urlList.sushi} title={titleList.sushi} component={Catalog}></Route>
-      <Route path={urlList.wok} title={titleList.wok} component={Catalog}></Route>
-      <Route path={urlList.pasta} title={titleList.pasta} component={Catalog}></Route>
-      <Route path={urlList.beverages} title={titleList.beverages} component={Catalog}></Route>
-      <Route path={urlList.snacks} title={titleList.snacks} component={Catalog}></Route>
-      <Route path={urlList.salad} title={titleList.salad} component={Catalog}></Route>
-      <Route path={urlList.dessert} title={titleList.dessert} component={Catalog}></Route>
-      <Route path={urlList.soup} title={titleList.soup} component={Catalog}></Route>
+    <Route path={urlList.index} component={AppWrap}>
+        <IndexRoute component={Home}/>
+        <Route path={urlList.catalog} component={Catalog}>
+            <Route path={urlList.pizza} title={titleList.pizza} component={Catalog}></Route>
+            <Route path={urlList.sushi} title={titleList.sushi} component={Catalog}></Route>
+            <Route path={urlList.wok} title={titleList.wok} component={Catalog}></Route>
+            <Route path={urlList.pasta} title={titleList.pasta} component={Catalog}></Route>
+            <Route path={urlList.beverages} title={titleList.beverages} component={Catalog}></Route>
+            <Route path={urlList.snacks} title={titleList.snacks} component={Catalog}></Route>
+            <Route path={urlList.salad} title={titleList.salad} component={Catalog}></Route>
+            <Route path={urlList.dessert} title={titleList.dessert} component={Catalog}></Route>
+            <Route path={urlList.soup} title={titleList.soup} component={Catalog}></Route>
+        </Route>
+        <Route path={urlList.detail} component={Detail}></Route>
+        <Route path={urlList.basket} component={Basket}></Route>
+        <Route path={urlList.order} component={Order}></Route>
+        <Route path={urlList.contact} component={Contact}></Route>
+        <Route path={urlList.guarantees} component={Guarantees}></Route>
+        <Route path={urlList.delivery} component={Delivery}></Route>
+        <Route path={urlList.payment} component={Payment}></Route>
+        <Route path={urlList.shares} component={Shares}></Route>
+        <Route path={urlList.shareDetail} component={SharesDetail}></Route>
+        <Route path={urlList.end} component={End}></Route>
+        <Route path={urlList.endregistration} component={EndRegistration}></Route>
+        <Route path={urlList.comein} component={ComeIn}></Route>
+        <Route path={urlList.login} component={Login}></Route>
+        <Route path={urlList.registration} component={Registration}></Route>
+        <Route path={urlList.user} component={User}></Route>
     </Route>
-    <Route path={urlList.detail} component={Detail}></Route>
-    <Route path={urlList.basket} component={Basket}></Route>
-    <Route path={urlList.order} component={Order}></Route>
-    <Route path={urlList.contact} component={Contact}></Route>
-    <Route path={urlList.guarantees} component={Guarantees}></Route>
-    <Route path={urlList.delivery} component={Delivery}></Route>
-    <Route path={urlList.payment} component={Payment}></Route>
-    <Route path={urlList.shares} component={Shares}></Route>
-    <Route path={urlList.shareDetail} component={SharesDetail}></Route>
-    <Route path={urlList.end} component={End}></Route>
-    <Route path={urlList.endregistration} component={EndRegistration}></Route>
-    <Route path={urlList.comein} component={ComeIn}></Route>
-    <Route path={urlList.login} component={Login}></Route>
-    <Route path={urlList.registration} component={Registration}></Route>
-    <Route path={urlList.user} component={User}></Route>
-  </Route>
 );
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      urlToken:API('Auth','getTokenWithoutAuth'),
-    }
-  }
-
-  componentDidMount(){
-    const localStorageUser = localStorage.getItem('user');
-
-    if (localStorageUser){
-      this.props.userObj({...localStorageUser});
-
-      axios.get(API('Loyalty','get', `%22token%22:%22${localStorageUser.user_token}%22`))
-      .then((response) => {
-        if (!response.data[0].error){
-          this.props.userLoyalty(response.data[0].result);
-        } else {
-          this.props.userObj({});
-          axios.get(this.state.urlToken)
-          .then((response) => {
-            this.props.token(response.data[0].result.user_token);
-          }).catch((error) => {console.log(error)})
+    constructor(props) {
+        super(props);
+        this.state = {
+            urlToken: API('Auth', 'getTokenWithoutAuth'),
         }
-      }).catch((error) => {console.log(error)});
-
-      this.props.token(localStorageUser.user_token);
     }
 
-    if (!this.props.Store.token && !localStorageUser){
-      axios.get(this.state.urlToken)
-      .then((response) => {
-        this.props.token(response.data[0].result.user_token)
-      }).catch((error) => {console.log(error)})
-    }
-  }
+    componentDidMount() {
+        const localStorageUser = JSON.parse(localStorage.getItem('user'));
 
-  render() {
-    return (
-        <Router history={browserHistory}>
-          {routes}
-        </Router>
-    );
-  }
+        if (!this.props.Store.token && Object.keys(localStorageUser).length) {
+            this.props.userObj({...localStorageUser});
+            this.props.token(localStorageUser.user_token);
+            this.props.getLoyalty(this.props.getToken, localStorageUser.user_token);
+        } else {
+            this.props.getToken();
+        }
+    }
+
+    render() {
+        return (
+            <Router history={browserHistory}>
+                {routes}
+            </Router>
+        );
+    }
 }
 
 const mapDispatchToProps = dispatch => ({
-    token: (item) => {dispatch({type: ActionType.PUSH_TOKEN, payload: item})},
-    userObj: (item) => {dispatch({type: ActionType.PUSH_USER, payload: item})},
-    userLoyalty: (item) => {dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: item})}
+    token: (item) => {
+        dispatch({type: ActionType.PUSH_TOKEN, payload: item})
+    },
+    userObj: (item) => {
+        dispatch({type: ActionType.PUSH_USER, payload: item})
+    },
+    userLoyalty: (item) => {
+        dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: item})
+    }
 });
 
 const mapStateToProps = state => ({
     Store: state
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(UserHOC(App))

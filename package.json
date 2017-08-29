@@ -8,6 +8,7 @@
     "axios": "^0.16.1",
     "bootstrap": "^4.0.0-alpha.6",
     "cyrillic-to-translit-js": "^1.0.2",
+    "immutable": "^3.8.1",
     "input-moment": "^0.3.2",
     "js-cookie": "^2.1.4",
     "less": "^2.7.2",

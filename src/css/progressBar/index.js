@@ -4,7 +4,7 @@ export default StyleSheet.create({
     wrap:{
         width:'90%',
         position:'relative',
-        paddingTop:'10px'
+        paddingTop:'5px'
     },
     line:{
         width:'100%',
@@ -15,7 +15,7 @@ export default StyleSheet.create({
     lineProgressWrap:{
         position:'absolute',
         width:'calc(100% - 4px)',
-        top:'12px',
+        top:'7px',
         left:'2px',
         height:'4px',
         zIndex:'2'
@@ -23,7 +23,8 @@ export default StyleSheet.create({
     lineProgress:{
         height:'4px',
         borderRadius:'4px',
-        float:'left'
+        float:'left',
+        background: '#e74b3b'
     },
     lin:{
         height:'4px',

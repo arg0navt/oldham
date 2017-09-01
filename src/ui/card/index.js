@@ -7,6 +7,7 @@ import {url, API} from '../../config/url'
 import {AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch} from 'react-axios'
 import progressBar from '../../css/progressBar'
 import {Link} from 'react-router';
+import * as ActionType from '../../config/ActionType';
 import axios from 'axios'
 
 const cardInterval = {
@@ -18,17 +19,17 @@ const cardInterval = {
 
 const staticUrl = `${url.STATIC_SERVER}/assets/${url.CLIENT_ID}/mod_app/main_card/`;
 
-const BarItem = ({progress, procent, status, active, length}) => (
+const BarItem = ({progress, percent, status, active, length}) => (
     <div className={active === 'active' ? css(progressBar.item, progressBar.active) : css(progressBar.item)}>
         <div className={css(progressBar.circle)}></div>
         <div className={css(progressBar.num)}>{progress}</div>
         <div className={active === 'active' ? css(progressBar.text, progressBar.active) : css(progressBar.text)}>
-            {status}<br/>{procent}%
+            {status}<br/>{percent}%
         </div>
     </div>
 )
 
-const ProgressBar = (props, {num}) => {
+const ProgressBar = ({num, userLoyalty, user_activity}) => {
     if (num < cardInterval.stepThree) {
         num = num / 0.6 - 12
     } else if (num === cardInterval.stepThree) {
@@ -38,83 +39,88 @@ const ProgressBar = (props, {num}) => {
     }
     return (
         <div className={css(progressBar.wrap)}>
-            <div className={css(progressBar.line)}></div>
-            <div className={css(progressBar.lineProgressWrap)}>
-                <div className={css(progressBar.lineProgress)} style={{width: num + '%'}}></div>
-            </div>
             <div className={css(progressBar.items)}>
-                {props.State.userLoyalty.settings.cards.map((item, index) => {
-                    return <BarItem key={index} progress={0} procent={5} status={'Basis'}
-                                    active={num > 0 ? 'active' : ''}/>
-                })}
+                <div className={css(progressBar.wrap)}>
+                    <div className={css(progressBar.line)}></div>
+                    <div className={css(progressBar.lineProgressWrap)}>
+                        <div className={css(progressBar.lineProgress)} style={{width: num + '%'}}></div>
+                    </div>
+                    <div className={css(progressBar.items)}>
+                        {userLoyalty.settings.cards.map((item, index) => {
+                            console.log(item);
+                            return <BarItem key={index} progress={item.activity} percent={item.percent} status={item.title_short}
+                                            active={num >= Number(item.activity) ? 'active' : ''}/>
+                        })}
+                    </div>
+                </div>
             </div>
         </div>
     )
 };
 
 const PercentImg = ({user_activity, userLoyalty}) => {
-    let percentImg = null;
     if (user_activity > cardInterval.stepOne && user_activity < cardInterval.stepTwo) {
-        percentImg = <img className={css(card.cardProcent)}
-                          src={`${staticUrl}percent_${userLoyalty.settings.cards[0].percent}.png`} alt=""/>
+        return <img className={css(card.cardProcent)}
+                    src={`${staticUrl}percent_${userLoyalty.settings.cards[0].percent}.png`} alt=""/>
     } else if (user_activity >= cardInterval.stepTwo && user_activity < cardInterval.stepThree) {
-        percentImg = <img className={css(card.cardProcent)}
-                          src={`${staticUrl}percent_${userLoyalty.settings.cards[1].percent}.png`} alt=""/>
+        return <img className={css(card.cardProcent)}
+                    src={`${staticUrl}percent_${userLoyalty.settings.cards[1].percent}.png`} alt=""/>
     } else if (user_activity >= cardInterval.stepThree) {
-        percentImg = <img className={css(card.cardProcent)}
-                          src={`${staticUrl}percent_${userLoyalty.settings.cards[2].percent}.png`} alt=""/>
-    } else if (user_activity === 100) {
-        percentImg = <img className={css(card.cardProcent)}
-                          src={`${staticUrl}percent_${userLoyalty.settings.cards[3].percent}.png`} alt=""/>
+        return <img className={css(card.cardProcent)}
+                    src={`${staticUrl}percent_${userLoyalty.settings.cards[2].percent}.png`} alt=""/>
+    } else if (user_activity === cardInterval.stepFour) {
+        return <img className={css(card.cardProcent)}
+                    src={`${staticUrl}percent_${userLoyalty.settings.cards[3].percent}.png`} alt=""/>
     } else {
-        percentImg = null
+        return null;
     }
-    return (
-        <div>{percentImg}</div>
-    )
 };
 
 const BackgroundCard = ({user_activity, userLoyalty}) => {
-    let backgroundCard = null;
     if (user_activity > cardInterval.stepOne && user_activity < cardInterval.stepTwo) {
-        backgroundCard = <img className={css(card.cardImg)}
-                              src={`${staticUrl}bg_card_${userLoyalty.settings.cards[0].percent}.png`}
-                              alt=""/>
+        return <img className={css(card.cardImg)}
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[0].percent}.png`}/>
     } else if (user_activity >= cardInterval.stepTwo && user_activity < cardInterval.stepThree) {
-        backgroundCard = <img className={css(card.cardImg)}
-                              src={`${staticUrl}bg_card_${userLoyalty.settings.cards[1].percent}.png`}
-                              alt=""/>
+        return <img className={css(card.cardImg)}
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[1].percent}.png`}/>
     } else if (user_activity >= cardInterval.stepThree) {
-        backgroundCard = <img className={css(card.cardImg)}
-                              src={`${staticUrl}bg_card_${userLoyalty.settings.cards[2].percent}.png`}
-                              alt=""/>
+        return <img className={css(card.cardImg)}
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[2].percent}.png`}/>
     } else if (user_activity === cardInterval.stepFour) {
-        backgroundCard = <img className={css(card.cardImg)}
-                              src={`${staticUrl}bg_card_${this.props.Store.userLoyalty.settings.cards[3].percent}.png`}
-                              alt=""/>
+        return <img className={css(card.cardImg)}
+                    src={`${staticUrl}bg_card_${this.props.Store.userLoyalty.settings.cards[3].percent}.png`}/>
     } else {
-        backgroundCard = <img className={css(card.cardImg)}
-                              src={`${staticUrl}bg_card_no_auth.png`}
-                              alt=""/>;
+        return <img className={css(card.cardImg)}
+                    src={`${staticUrl}bg_card_no_auth.png`}/>;
     }
-    return (
-        <div>{backgroundCard}</div>
-    )
 };
 
+const CardBottom = () => (
+    <div className={css(card.cardBottom)}>
+        <div className={css(card.cardBottomLeft)}>
+            <p className={css(card.cardBottomNum)}>кол-во баллов<br/><span
+                className={css(card.cardBottomNumAction)}>100</span></p>
+        </div>
+        <div className={css(card.cardBottomRight)}>
+            <div className={css(card.cardButtonWrap)}>
+                <div className={css(card.cardButton, card.cardButtonOne)}>
+                    предъявить карту и<br/><span
+                    className={css(card.cardButtonText)}>Получить баллы</span>
+                </div>
+                <div className={css(card.cardButton, card.cardButtonOne)}>
+                    выбрать подарок и<br/><span
+                    className={css(card.cardButtonText)}>Потратить баллы</span>
+                </div>
+            </div>
+        </div>
+    </div>
+)
+
+
 class Card extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            num: 0,
-            login: false
-        }
-    }
-
     render() {
-        const {userLoyalty} = this.props.Store;
-        const {user_activity} = this.props.Store.userLoyalty;
-
+        const { userLoyalty } = this.props.Store;
+        const { user_activity } = this.props.Store.userLoyalty;
         return (
             <div className={css(card.blockCard)}>
                 <div className={css(card.cardContent)}>
@@ -133,34 +139,11 @@ class Card extends Component {
                             {Object.keys(userLoyalty).length ? (
                                 <div>
                                     <Link to="/user"
-                                          className={css(card.cardName)}>{this.props.Store.user.user_name}</Link>
+                                          className={css(card.cardName)}>{this.props.Store.user.get('user_name')}</Link>
                                     <p className={css(card.cardScore)}>активность <span
-                                        className={css(card.cardScoreActive)}>{this.props.Store.userLoyalty.user_activity}</span>
+                                        className={css(card.cardScoreActive)}>{user_activity}</span>
                                         из 100</p>
-                                    <div className={css(progressBar.wrap)}>
-                                        <div className={css(progressBar.line)}></div>
-                                        <div className={css(progressBar.lineProgressWrap)}>
-                                            <div className={css(progressBar.lineProgress)}
-                                                 style={{width: `${(100 / userLoyalty.settings.cards.length) * (userLoyalty.settings.cards.length - 1) - 2}%`}}>
-                                                <div className={css(progressBar.lin)}
-                                                     style={user_activity < 50 ? {width: `${(user_activity / cardInterval.stepThree) * cardInterval.stepFour}%`} : {width: '100%'}}></div>
-                                            </div>
-                                            <div className={css(progressBar.lineProgress)}
-                                                 style={{width: `${(100 / userLoyalty.settings.cards.length) * (userLoyalty.settings.cards.length - (userLoyalty.settings.cards.length - 1)) - 2}%`}}>
-                                                <div className={css(progressBar.lin)}
-                                                     style={user_activity > 50 ? {width: `${((user_activity - cardInterval.stepThree) / cardInterval.stepThree) * cardInterval.stepFour}%`} : {width: '0%'}}></div>
-                                            </div>
-                                        </div>
-                                        <div className={css(progressBar.items)}>
-                                            {this.props.Store.userLoyalty.settings.cards.map((item, index) => {
-                                                return <BarItem key={index} progress={item.activity}
-                                                                procent={item.percent}
-                                                                length={this.props.Store.userLoyalty.settings.cards.length}
-                                                                status={item.title_short}
-                                                                active={parseFloat(this.props.Store.userLoyalty.user_activity) >= parseFloat(item.activity) ? 'active' : ''}/>
-                                            })}
-                                        </div>
-                                    </div>
+                                    <ProgressBar num={60} user_activity={user_activity} userLoyalty={userLoyalty} />
                                 </div>
                             ) : (
                                 <div>
@@ -171,24 +154,7 @@ class Card extends Component {
                         </div>
                     </div>
                     {Object.keys(userLoyalty).length ? (
-                        <div className={css(card.cardBottom)}>
-                            <div className={css(card.cardBottomLeft)}>
-                                <p className={css(card.cardBottomNum)}>кол-во баллов<br/><span
-                                    className={css(card.cardBottomNumAction)}>100</span></p>
-                            </div>
-                            <div className={css(card.cardBottomRight)}>
-                                <div className={css(card.cardButtonWrap)}>
-                                    <div className={css(card.cardButton, card.cardButtonOne)}>
-                                        предъявить карту и<br/><span
-                                        className={css(card.cardButtonText)}>Получить баллы</span>
-                                    </div>
-                                    <div className={css(card.cardButton, card.cardButtonOne)}>
-                                        выбрать подарок и<br/><span
-                                        className={css(card.cardButtonText)}>Потратить баллы</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <CardBottom />
                     ) : null}
                 </div>
                 <BackgroundCard user_activity={user_activity} userLoyalty={userLoyalty}/>
@@ -203,7 +169,7 @@ export default connect(
     }),
     dispatch => ({
         userLoyalty: (item) => {
-            dispatch({type: 'PUSH_USER_LOYALTY', payload: item})
+            dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: item})
         }
     })
 )(Card)

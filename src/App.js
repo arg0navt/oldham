@@ -28,9 +28,10 @@ import './fonts/GothamPro/styles.css';
 import './fonts/GothamPro-Medium/styles.css';
 import './fonts/GothamPro-Bold/styles.css';
 import './fonts/GothamPro-Italic/styles.css';
-import {url, API, titleList, urlList} from './config/url';
+import {url, API, titleList, urlList, storage} from './config/url';
 import * as ActionType from './config/ActionType';
-import UserHOC from './queries/user';
+import { getToken, getLoyalty } from './queries/user';
+import { getActions } from './queries/actions';
 
 const routes = (
     <Route path={urlList.index} component={AppWrap}>
@@ -65,22 +66,29 @@ const routes = (
 );
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            urlToken: API('Auth', 'getTokenWithoutAuth'),
-        }
-    }
-
     componentDidMount() {
-        const localStorageUser = JSON.parse(localStorage.getItem('user'));
+        const localStorageObj = {
+            user: JSON.parse(localStorage.getItem(storage.user)) || {},
+            loyalty: JSON.parse(localStorage.getItem(storage.loyalty)) || {} ,
+            actions: JSON.parse(localStorage.getItem(storage.actions)) || [],
+        };
 
-        if (!this.props.Store.token && Object.keys(localStorageUser).length) {
-            this.props.userObj({...localStorageUser});
-            this.props.token(localStorageUser.user_token);
-            this.props.getLoyalty(this.props.getToken, localStorageUser.user_token);
+        if (!this.props.Store.token && Object.keys(localStorageObj.user).length) {
+            this.props.pushUser({...localStorageObj.user});
+            this.props.pushToken(localStorageObj.user.user_token);
+            if (Object.keys(localStorageObj.loyalty).length) {
+                this.props.userLoyalty(localStorageObj.loyalty);
+            } else {
+                this.props.getUserLoyalty(localStorageObj.user.user_token, this.props.token);
+            }
         } else {
-            this.props.getToken();
+            this.props.token();
+        }
+
+        if (Object.keys(localStorageObj.actions).length) {
+            this.props.pushActions(localStorageObj.actions);
+        } else {
+            this.props.getPushActions()
         }
     }
 
@@ -94,14 +102,26 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    token: (item) => {
-        dispatch({type: ActionType.PUSH_TOKEN, payload: item})
+    token: () => {
+        getToken(dispatch);
     },
-    userObj: (item) => {
-        dispatch({type: ActionType.PUSH_USER, payload: item})
+    pushToken: (item) => {
+        dispatch({type: ActionType.PUSH_TOKEN, payload: item});
     },
-    userLoyalty: (item) => {
-        dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: item})
+    pushUser: (item) => {
+        dispatch({type: ActionType.PUSH_USER, payload: item});
+    },
+    getUserLoyalty: (token, callback) => {
+        getLoyalty(dispatch, token, callback);
+    },
+    userLoyalty: (items) => {
+        dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: items});
+    },
+    getPushActions: () => {
+        getActions(dispatch);
+    },
+    pushActions: (items) => {
+        dispatch({type: ActionType.PUSH_ACTIONS, payload: items});
     }
 });
 
@@ -109,4 +129,4 @@ const mapStateToProps = state => ({
     Store: state
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserHOC(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -11,6 +11,7 @@ import c from '../../css/comein';
 import FacebookLogin from 'react-facebook-login';;
 import * as ActionType from '../../config/ActionType';
 import {IndexRoute, IndexRedirect, Router, Route, browserHistory} from 'react-router';
+import { getLoyalty } from '../../queries/user';
 
 class Registration extends Component {
     constructor(props) {
@@ -24,15 +25,7 @@ class Registration extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.Store.token && Object.keys(nextProps.Store.user).length) {
-            axios.get(API('Loyalty', 'get', `%22token%22:%22${this.props.Store.token}%22`))
-                .then((res) => {
-                    if (res.data[0].error) {
-                        this.props.userLoyalty(res.data[0].result);
-                    }
-                })
-                .catch((er) => {
-                    this.error(errorTextServer);
-                })
+            this.props.getUserLoyalty(this.props.Store.token, this.props.token);
         }
     }
 
@@ -107,9 +100,9 @@ const mapDispatchToProps = dispatch => ({
     userObj: (item) => {
         dispatch({type: ActionType.PUSH_USER, payload: item})
     },
-    userLoyalty: (item) => {
-        dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: item})
-    }
+    getUserLoyalty: (token, callback) => {
+        getLoyalty(dispatch, token, callback);
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration)

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import nav from './nav'
-import basket from './basket'
-import price from './price'
-import form from './form'
-import token from './token'
-import user from './user'
-import userLoyalty from './userLoyalty'
+import nav from './nav';
+import basket from './basket';
+import price from './price';
+import form from './form';
+import token from './token';
+import user from './user';
+import userLoyalty from './userLoyalty';
+import actions from './actions';
 
 export default combineReducers({
     routing: routerReducer,
     nav,
+    actions,
     basket,
     price,
     form,

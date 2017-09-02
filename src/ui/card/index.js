@@ -47,7 +47,6 @@ const ProgressBar = ({num, userLoyalty, user_activity}) => {
                     </div>
                     <div className={css(progressBar.items)}>
                         {userLoyalty.settings.cards.map((item, index) => {
-                            console.log(item);
                             return <BarItem key={index} progress={item.activity} percent={item.percent} status={item.title_short}
                                             active={num >= Number(item.activity) ? 'active' : ''}/>
                         })}
@@ -114,7 +113,7 @@ const CardBottom = () => (
             </div>
         </div>
     </div>
-)
+);
 
 
 class Card extends Component {
@@ -138,8 +137,7 @@ class Card extends Component {
                         <div className={css(card.cardInfo)}>
                             {Object.keys(userLoyalty).length ? (
                                 <div>
-                                    <Link to="/user"
-                                          className={css(card.cardName)}>{this.props.Store.user.get('user_name')}</Link>
+                                    <Link className={css(card.cardName)}>{this.props.Store.user.user_name}</Link>
                                     <p className={css(card.cardScore)}>активность <span
                                         className={css(card.cardScoreActive)}>{user_activity}</span>
                                         из 100</p>

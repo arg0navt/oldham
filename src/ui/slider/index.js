@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios'
@@ -12,7 +13,8 @@ const params = {
     paginationClickable: true,
     spaceBetween: 30,
     lazyLoading: true
-}
+};
+
 const SlideItem = ({img, text, id}) => (
     <div className={css(slider.slide)}>
         <Link to={`/share_detail?code=${id}`}><div className={css(slider.blockImg)} style={{backgroundImage:'url(' + img + ')'}}></div></Link>
@@ -27,36 +29,28 @@ const SlideItem = ({img, text, id}) => (
             </Row>
         </div>
     </div>
-)
+);
 
-export default class Slider extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            url:API('Actions','get')
-        }
-    }
+class Slider extends Component{
     render(){
+        const { actions } = this.props.Store;
         return(
             <div className={css(slider.sliderWrap)}>
-                <Get url={this.state.url}>
-                        {(error, response, isLoading) => {
-                            if(error) {
-                                return (<div>Something bad happened: {error.message}</div>)
-                            } else if(response !== null) {
-                                return (
-                                    <Swiper {...params}>
-                                        {response.data[0].result.map((item, index) => {
-                                            return(<div key={index} className="item"><SlideItem img={`http://dev.kaerus.ru/uploads/${item.action_image_s}`} id={item.action_id} text={`${item.action_title}`} /></div>)
-                                        })}
-                                    </Swiper>
-                                )
-                            }
-                            return (<div></div>)
-                        }}
-                    </Get>
+                {Object.keys(actions).length ? (
+                    <Swiper {...params}>
+                        {actions.map((item, index) => {
+                            return(<div key={index} className="item"><SlideItem img={`http://dev.kaerus.ru/uploads/${item.action_image_s}`} id={item.action_id} text={`${item.action_title}`} /></div>)
+                        })}
+                    </Swiper>
+                ) : null}
                 <div className="swiper-pagination"></div>
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    Store: state
+});
+
+export default connect(mapStateToProps)(Slider);

@@ -1,12 +1,10 @@
 import * as ActionType from '../../config/ActionType';
-import { Map } from 'immutable';
+import { storage } from '../../config/url';
 
-const initialState = Map({});
-
-export default function user(state = initialState, action) {
+export default function user(state = {}, action) {
   if (action.type === ActionType.PUSH_USER){
-    localStorage.setItem('user', JSON.stringify(action.payload));
-    return state.merge(Map(action.payload));
+    localStorage.setItem(storage.user, JSON.stringify(action.payload));
+    return action.payload;
   }
   return state;
 }

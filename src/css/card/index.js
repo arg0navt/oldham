@@ -53,7 +53,7 @@ export default StyleSheet.create({
     },
     cardName:{
         fontSize:'16px',
-        color:'#fff',
+        color:'#fff !important',
         fontFamily:'GothamPro-Bold, sans-serif',
         margin:'0',
         background: `url(${process.env.PUBLIC_URL}/img/icon/up.png) no-repeat right`,

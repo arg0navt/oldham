@@ -11,7 +11,7 @@ export const url = {
 };
 
 export const API = (controll, method, token = '') => {
-    if (token != ''){
+    if (token !== ''){
         token = token + ','
     }
     return `http://dev.kaerus.ru/${controll}/${method}.json?commands=[{%22data%22:{${token}%22client_id%22:%22${url.CLIENT_ID}%22,%22platform%22:%22${url.PLATFORM}%22}}]`
@@ -57,5 +57,11 @@ export const urlList = {
     registration: '/registration',
     user: '/user'
 };
+
+export const storage = {
+    user: 'user',
+    actions: 'actions',
+    loyalty: 'loyalty',
+}
 
 export const errorTextServer = 'Ошибка от сервера';

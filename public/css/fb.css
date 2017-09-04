@@ -15,3 +15,38 @@
     padding: 0 !important;
     height: 50px !important;
 }
+
+.rc-tabs-top .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
+    color: #b5b5b5;
+    font-size: 13px;
+    padding: 0;
+    line-height: 46px;
+    height: 45px;
+}
+
+.rc-tabs-tab-active, .rc-tabs-tab-active:hover {
+    color: #fff !important;
+    font-family: GothamPro-Medium;
+}
+.rc-tabs-top .rc-tabs-ink-bar {
+    height: 6px;
+    background: #df4939;
+}
+.rc-tabs-bar, .rc-tabs-nav-container{
+    width: 100%;
+}
+.rc-tabs-top{
+
+    border-bottom:0;
+}
+.rc-tabs-top .rc-tabs-bar {
+    border-bottom:0;
+    position: fixed;
+    left: 0;
+    z-index: 2;
+    background: url(/img/bg.jpg) repeat-y;
+}
+
+.rc-tabs-top .rc-tabs-content-animated .rc-tabs-tabpane {
+    padding-top: 45px;
+}

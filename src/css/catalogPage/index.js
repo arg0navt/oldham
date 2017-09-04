@@ -1,6 +1,22 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
 export default StyleSheet.create({
+    categoryWr: {
+      width: 'calc(100% + 30px)',
+      marginLeft:-15,
+    },
+    catalogWrap: {
+        width: '100%',
+        marginLeft: 0,
+    },
+    tabText: {
+        color: '#b5b5b5 !important',
+        fontSize: 13,
+        paddingLeft: 20,
+        paddingRight: 20,
+        lineHeight: 46,
+        height: 45,
+    },
     tabBlock:{
         width:'100%',
         height:46,
@@ -32,7 +48,6 @@ export default StyleSheet.create({
     item:{
         width:'100%',
         padding:15,
-        marginLeft:-15,
         position:'relative',
         ':after':{
             width:'100%',

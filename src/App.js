@@ -32,20 +32,22 @@ import {url, API, titleList, urlList, storage} from './config/url';
 import * as ActionType from './config/ActionType';
 import { getToken, getLoyalty } from './queries/user';
 import { getActions } from './queries/actions';
+import { getCatalogCategoty } from './queries/catalog';
 
 const routes = (
     <Route path={urlList.index} component={AppWrap}>
         <IndexRoute component={Home}/>
         <Route path={urlList.catalog} component={Catalog}>
-            <Route path={urlList.pizza} title={titleList.pizza} component={Catalog}></Route>
-            <Route path={urlList.sushi} title={titleList.sushi} component={Catalog}></Route>
-            <Route path={urlList.wok} title={titleList.wok} component={Catalog}></Route>
-            <Route path={urlList.pasta} title={titleList.pasta} component={Catalog}></Route>
-            <Route path={urlList.beverages} title={titleList.beverages} component={Catalog}></Route>
-            <Route path={urlList.snacks} title={titleList.snacks} component={Catalog}></Route>
-            <Route path={urlList.salad} title={titleList.salad} component={Catalog}></Route>
-            <Route path={urlList.dessert} title={titleList.dessert} component={Catalog}></Route>
-            <Route path={urlList.soup} title={titleList.soup} component={Catalog}></Route>
+            <IndexRoute title={titleList.pizza} tabName={'pizza'} component={Catalog} />
+            <Route path={urlList.pizza} title={titleList.pizza} tabName={'pizza'} component={Catalog}></Route>
+            <Route path={urlList.sushi} title={titleList.sushi} tabName={'sushi'} component={Catalog}></Route>
+            <Route path={urlList.wok} title={titleList.wok} tabName={'wok'} component={Catalog}></Route>
+            <Route path={urlList.pasta} title={titleList.pasta} tabName={'pasta'} component={Catalog}></Route>
+            <Route path={urlList.beverages} title={titleList.beverages} tabName={'beverages'} component={Catalog}></Route>
+            <Route path={urlList.snacks} title={titleList.snacks} tabName={'snacks'} component={Catalog}></Route>
+            <Route path={urlList.salad} title={titleList.salad} tabName={'salad'} component={Catalog}></Route>
+            <Route path={urlList.dessert} title={titleList.dessert} tabName={'dessert'} component={Catalog}></Route>
+            <Route path={urlList.soup} title={titleList.soup} tabName={'soup'} component={Catalog}></Route>
         </Route>
         <Route path={urlList.detail} component={Detail}></Route>
         <Route path={urlList.basket} component={Basket}></Route>
@@ -71,6 +73,7 @@ class App extends Component {
             user: JSON.parse(localStorage.getItem(storage.user)) || {},
             loyalty: JSON.parse(localStorage.getItem(storage.loyalty)) || {} ,
             actions: JSON.parse(localStorage.getItem(storage.actions)) || [],
+            catalogList: JSON.parse(localStorage.getItem(storage.categoryList)) || [],
         };
 
         if (!this.props.Store.token && Object.keys(localStorageObj.user).length) {
@@ -87,8 +90,16 @@ class App extends Component {
 
         if (Object.keys(localStorageObj.actions).length) {
             this.props.pushActions(localStorageObj.actions);
+            this.props.getPushActions();
         } else {
             this.props.getPushActions()
+        }
+
+        if (Object.keys(localStorageObj.catalogList).length) {
+            this.props.pushCatalogCategoty(localStorageObj.catalogList);
+            this.props.getPushCatalogCategoty()
+        } else {
+            this.props.getPushCatalogCategoty()
         }
     }
 
@@ -105,23 +116,29 @@ const mapDispatchToProps = dispatch => ({
     token: () => {
         getToken(dispatch);
     },
-    pushToken: (item) => {
+    pushToken: item => {
         dispatch({type: ActionType.PUSH_TOKEN, payload: item});
     },
-    pushUser: (item) => {
+    pushUser: item => {
         dispatch({type: ActionType.PUSH_USER, payload: item});
     },
     getUserLoyalty: (token, callback) => {
         getLoyalty(dispatch, token, callback);
     },
-    userLoyalty: (items) => {
+    userLoyalty: items => {
         dispatch({type: ActionType.PUSH_USER_LOYALTY, payload: items});
     },
     getPushActions: () => {
         getActions(dispatch);
     },
-    pushActions: (items) => {
+    pushActions: items => {
         dispatch({type: ActionType.PUSH_ACTIONS, payload: items});
+    },
+    pushCatalogCategoty: items => {
+        dispatch({type: ActionType.PUSH_CATEGORY, payload: items});
+    },
+    getPushCatalogCategoty: () => {
+        getCatalogCategoty(dispatch)
     }
 });
 

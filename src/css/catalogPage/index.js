@@ -111,7 +111,8 @@ export default StyleSheet.create({
         textAlign:'center',
         color:'#ffffff',
         lineHeight:'24px',
-        float:'right'
+        float:'right',
+        overflow: 'hidden',
     },
     plus:{
         width:25,
@@ -206,7 +207,8 @@ export default StyleSheet.create({
         marginTop:0,
         height:24,
         width:81,
-        float:'right'
+        float:'right',
+        overflow:'hidden'
     },
     minus:{
         width:24,
@@ -214,7 +216,10 @@ export default StyleSheet.create({
     },
     plus:{
         width:24,
-        height:22
+        height:24,
+        float: 'right',
+        lineHeight: '18px',
+        borderLeft: '1px solid #ab392d',
     },
     input:{
         width:'calc(100% - 48px)',

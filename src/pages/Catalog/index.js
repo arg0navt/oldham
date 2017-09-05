@@ -18,7 +18,6 @@ class Catalog extends Component {
     onChange = (key) => {
         browserHistory.push(`/catalog/${key}`);
     };
-
     render() {
         let activeKey = this.props.routes[2].tabName;
         return (
@@ -42,7 +41,6 @@ class Catalog extends Component {
         );
     }
 }
-
 export default connect(
     state => ({
         Store: state

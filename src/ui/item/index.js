@@ -96,86 +96,34 @@ class Item extends Component {
             })
         };
 
-        const eventsItem = (price, numbers, numbersChild) => {
+        const eventsItem = (price, numbers, size) => {
             if (operator === operatorName.add) {
-                Object.assign(numbers, {default: ++numbersChild});
-                pushNewState(this.state.numbers.default, Number(item_price), false);
+                Object.assign(this.state.numbers, {[numbers]: ++this.state.numbers[numbers]});
+                pushNewState(this.state.numbers[numbers], price, size);
             } else if (operator === operatorName.clean) {
-                if (this.state.numbers.default > 1) {
-                    Object.assign(this.state.numbers, {default: --this.state.numbers.default});
-                    pushNewState(this.state.numbers.default, Number(item_price), false);
-                } else if (this.state.numbers.default === 1) {
-                    Object.assign(this.state.numbers, {default: 0});
-                    Object.assign(this.state.price, {default: 0});
+                if (this.state.numbers[numbers] > 1) {
+                    Object.assign(this.state.numbers, {[numbers]: --this.state.numbers[numbers]});
+                    pushNewState(this.state.numbers[numbers], price, size);
+                } else if (this.state.numbers[numbers] === 1) {
+                    Object.assign(this.state.numbers, {[numbers]: 0});
+                    Object.assign(this.state.price, {[numbers]: 0});
                     this.props.deleteItemBasket({
                         name: item_name,
                         category: category_name,
                         id: item_id,
-                        numbers: this.state.numbers.default,
-                        price: this.state.price.default,
-                        size: false
+                        numbers: this.state.numbers[numbers],
+                        price: this.state.price[numbers],
+                        size: size
                     })
                 }
             }
-        }
+        };
 
         if (this.state.size) {
-            const price = Number(item_price) + Number(item_size_m_price);
-            if (operator === operatorName.add) {
-                this.setState({
-                    numbers: {
-                        default: this.state.numbers.default,
-                        sizeNumbers: ++this.state.numbers.sizeNumbers
-                    }
-                });
-                pushNewState(this.state.numbers.sizeNumbers, price, true);
-            } else if (operator === operatorName.clean) {
-                if (this.state.numbers.sizeNumbers > 1) {
-                    this.setState({
-                        numbers: {
-                            default: this.state.numbers.default,
-                            sizeNumbers: --this.state.numbers.sizeNumbers
-                        }
-                    });
-                    pushNewState(this.state.numbers.sizeNumbers, price, true);
-                } else if (this.state.numbers.default === 1) {
-                    this.setState({
-                        numbers: {sizeNumbers: 0, default: this.state.numbers.default},
-                        price: {default: this.state.price.default, sizePrice: 0}
-                    });
-                    this.props.deleteItemBasket({
-                        name: item_name,
-                        category: category_name,
-                        id: item_id,
-                        numbers: this.state.numbers.sizeNumbers,
-                        price: this.state.price.sizePrice,
-                        size: true
-                    })
-                }
-            }
+            eventsItem(Number(item_price) + Number(item_size_m_price), 'sizeNumbers', true);
         } else {
-            if (operator === operatorName.add) {
-                Object.assign(this.state.numbers, {default: ++this.state.numbers.default});
-                pushNewState(this.state.numbers.default, Number(item_price), false);
-            } else if (operator === operatorName.clean) {
-                if (this.state.numbers.default > 1) {
-                    Object.assign(this.state.numbers, {default: --this.state.numbers.default});
-                    pushNewState(this.state.numbers.default, Number(item_price), false);
-                } else if (this.state.numbers.default === 1) {
-                    Object.assign(this.state.numbers, {default: 0});
-                    Object.assign(this.state.price, {default: 0});
-                    this.props.deleteItemBasket({
-                        name: item_name,
-                        category: category_name,
-                        id: item_id,
-                        numbers: this.state.numbers.default,
-                        price: this.state.price.default,
-                        size: false
-                    })
-                }
-            }
+            eventsItem(Number(item_price), 'default', false);
         }
-
     }
 
     componentDidMount() {

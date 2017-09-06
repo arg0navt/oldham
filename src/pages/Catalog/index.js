@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import _ from 'underscore';
 import {css} from 'aphrodite/no-important';
 import {browserHistory} from 'react-router';
 import c from '../../css/catalogPage'
@@ -20,6 +21,15 @@ class Catalog extends Component {
     };
     render() {
         let activeKey = this.props.routes[2].tabName;
+        let id = this.props.routes[1].childRoutes.findIndex((item, index) => {
+            return item.path === this.props.routes[2].path
+        });
+        if (id === -1) {
+            id = 0
+        }
+        if (activeKey === 'Пицца') {
+            activeKey = 'pizza';
+        }
         return (
             <div className={css(c.catalogWrap)}>
                 {this.props.route.childRoutes ? (
@@ -33,10 +43,11 @@ class Catalog extends Component {
                         renderTabContent={() => <TabContent/>}
                     >
                         {this.props.route.childRoutes.map((item, index) => {
-                            return <TabPane key={item.tabName} tab={item.title}><CatalogItems id={index + 1}/></TabPane>
+                            return <TabPane key={item.tabName} tab={item.title}></TabPane>
                         })}
                     </Tabs>
                 ) : null}
+                <CatalogItems id={id + 1}/>
             </div>
         );
     }

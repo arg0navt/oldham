@@ -16,6 +16,10 @@
     height: 50px !important;
 }
 
+.rc-tabs-top .rc-tabs-nav-swipe{
+    transition: .2s all ease-in-out;
+}
+
 .rc-tabs-top .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
     color: #b5b5b5;
     font-size: 13px;
@@ -50,3 +54,4 @@
 .rc-tabs-top .rc-tabs-content-animated .rc-tabs-tabpane {
     padding-top: 45px;
 }
+

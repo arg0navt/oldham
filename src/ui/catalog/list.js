@@ -8,34 +8,50 @@ import {getCatalogItems} from '../../queries/catalog';
 import Item from '../../ui/item'
 
 class CatalogItems extends Component {
-    componentDidMount() {
+
+    constructor(props){
+        super(props);
+        this.rerenderComponent = this.rerenderComponent.bind(this);
+    }
+
+    rerenderComponent(id) {
         const storageItems = JSON.parse(localStorage.getItem(storage.categoryItems)) || [];
         let findCategoryId = null;
         if (storageItems) {
             findCategoryId = storageItems.find((item) => {
-                return item.id === this.props.id;
+                return item.id === id;
             });
             if (findCategoryId) {
                 this.props.pushCategoryItems(findCategoryId);
-                this.props.getPushCatalogItems(this.props.id);
+                this.props.getPushCatalogItems(id);
             } else {
-                this.props.getPushCatalogItems(this.props.id);
+                this.props.getPushCatalogItems(id);
             }
         } else {
-            this.props.getPushCatalogItems(this.props.id);
+            this.props.getPushCatalogItems(id);
+        }
+    }
+
+    componentDidMount() {
+        this.rerenderComponent(this.props.id);
+    }
+
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.id !== this.props.id){
+            this.rerenderComponent(nextProps.id)
         }
     }
 
     render() {
-        const { categoryItems } = this.props.Store;
-        let list = categoryItems.find((item) => {
+        let list = this.props.Store.categoryItems.find((item) => {
             return item.id === this.props.id;
         });
         return (
             <div className={css(c.categoryWr)}>
                 {list ? (
                     <div>
-                        {list.list.map((item, index) => <Item key={index} item={item} />)}
+                        {list.list.map((item, index) => <Item key={item.item_id} item={item} />)}
                     </div>
                 ) : null}
             </div>

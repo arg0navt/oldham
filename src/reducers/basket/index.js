@@ -1,5 +1,5 @@
 import * as ActionType from '../../config/ActionType';
-import _ from 'underscore'
+import _ from 'underscore';
 
 export default function basket(state = [], action) {
     if (action.type === ActionType.ADD_BASKET) {

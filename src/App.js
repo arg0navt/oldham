@@ -38,7 +38,7 @@ const routes = (
     <Route path={urlList.index} component={AppWrap}>
         <IndexRoute component={Home}/>
         <Route path={urlList.catalog} component={Catalog}>
-            <IndexRoute title={titleList.pizza} tabName={'pizza'} component={Catalog} />
+            <IndexRoute title={titleList.pizza} tabName={titleList.pizza} component={Catalog} />
             <Route path={urlList.pizza} title={titleList.pizza} tabName={'pizza'} component={Catalog}></Route>
             <Route path={urlList.sushi} title={titleList.sushi} tabName={'sushi'} component={Catalog}></Route>
             <Route path={urlList.wok} title={titleList.wok} tabName={'wok'} component={Catalog}></Route>

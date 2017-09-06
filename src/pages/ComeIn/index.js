@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { css } from 'aphrodite/no-important';
 import { connect } from 'react-redux';
-import { Recomendation } from '../../ui/recomendation'
-import { CatalogPanel } from '../../ui/catalogPanel'
 import {Link} from 'react-router';
-import global from '../../css/global'
 import c from '../../css/comein'
-import cookie from 'react-cookies'
 
 class ComeIn extends Component{
     render(){

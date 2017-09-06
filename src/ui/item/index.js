@@ -6,7 +6,6 @@ import global from '../../css/global'
 import {Link} from 'react-router';
 import * as ActionType from '../../config/ActionType';
 import { storage } from '../../config/url';
-import _ from 'underscore';
 
 const operatorName = {
     add: 'add',
@@ -144,9 +143,9 @@ class Item extends Component {
                 setTimeout(() => {
                     findItem.map((item) => {
                         if (item.size) {
-                            this.setState({price: {sizePrice: item.price, default: this.state.price.default}, numbers: {sizeNumbers: item.numbers, default: this.state.numbers.default}, size: item.size});
+                            return this.setState({price: {sizePrice: item.price, default: this.state.price.default}, numbers: {sizeNumbers: item.numbers, default: this.state.numbers.default}, size: item.size});
                         } else {
-                            this.setState({price: {default: item.price, sizePrice: this.state.price.sizePrice}, numbers: {default: item.numbers, sizeNumbers: this.state.numbers.sizeNumbers}});
+                            return this.setState({price: {default: item.price, sizePrice: this.state.price.sizePrice}, numbers: {default: item.numbers, sizeNumbers: this.state.numbers.sizeNumbers}});
                         }
                     });
                 });
@@ -158,10 +157,8 @@ class Item extends Component {
     render() {
         const {
             item_image_m,
-            item_image_s,
             item_description,
             item_name,
-            category_name,
             item_id,
             item_price,
             item_size_m_price
@@ -171,7 +168,7 @@ class Item extends Component {
                 <div className={css(c.itemPich)}>
                     <div className={css(c.itemImgWr)}>
                         <Link to={`/catalog/${this.state.link}/${item_id}`}><img className={css(c.img)}
-                                                                                 src={`http://dev.kaerus.ru/uploads/${item_image_m}`}/></Link>
+                                                                                 src={`http://dev.kaerus.ru/uploads/${item_image_m}`} alt=""/></Link>
                     </div>
                 </div>
                 <div className={css(c.itemText)}>

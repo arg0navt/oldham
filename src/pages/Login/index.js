@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 import {css} from 'aphrodite/no-important';
 import {connect} from 'react-redux';
-import {Recomendation} from '../../ui/recomendation'
-import {CatalogPanel} from '../../ui/catalogPanel'
 import {Link} from 'react-router';
-import {url, API, urlList, errorTextServer} from '../../config/url'
+import {API, urlList, errorTextServer} from '../../config/url'
 import axios from 'axios'
-import global from '../../css/global'
 import c from '../../css/comein'
-import cookie from 'react-cookies'
-import FacebookLogin from 'react-facebook-login';
 import * as ActionType from '../../config/ActionType';
-import {IndexRoute, IndexRedirect, Router, Route, browserHistory} from 'react-router';
 
 class Login extends Component {
     constructor(props) {

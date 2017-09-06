@@ -114,12 +114,6 @@ export default StyleSheet.create({
         float:'right',
         overflow: 'hidden',
     },
-    plus:{
-        width:25,
-        float:'right',
-        height:24,
-        borderLeft:'1px solid #a32c1e'
-    },
     price:{
         width:56,
         float:'left',

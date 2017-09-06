@@ -111,7 +111,6 @@ export default StyleSheet.create({
         backgroundSize: '35px',
         color:'#fff',
         fontFamily: 'GothamPro-Bold',
-        lineHeight:'inherit',
         width:'90%',
         margin:'auto',
         marginBottom:15,

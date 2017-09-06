@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
 import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
-import { transliterate } from '../../config/url';
 import catalog from '../../css/catalog';
 
 const CatalogItem = ({img, icon, text, link, width}) => (
     <div className={css(catalog.itemCol)}>
         <Link className={css(catalog.link)} to={'/catalog' + link}>
-        <img className={css(catalog.itemBlock, catalog.blockImage)} src={img} />
+        <img className={css(catalog.itemBlock, catalog.blockImage)} src={img} alt="" />
         </Link>
     </div>
 );

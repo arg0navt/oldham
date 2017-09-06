@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import {Container, Row, Col} from 'reactstrap';
 import {css} from 'aphrodite/no-important';
 import {connect} from 'react-redux';
 import card from '../../css/card'
-import {url, API} from '../../config/url'
-import {AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch} from 'react-axios'
+import {url} from '../../config/url'
 import progressBar from '../../css/progressBar'
 import {Link} from 'react-router';
 import * as ActionType from '../../config/ActionType';
-import axios from 'axios'
 
 const cardInterval = {
     stepOne: 0,
@@ -21,13 +18,13 @@ const staticUrl = `${url.STATIC_SERVER}/assets/${url.CLIENT_ID}/mod_app/main_car
 
 const BarItem = ({progress, percent, status, active, length}) => (
     <div className={active === 'active' ? css(progressBar.item, progressBar.active) : css(progressBar.item)}>
-        <div className={css(progressBar.circle)}></div>
+        <div className={css(progressBar.circle)} />
         <div className={css(progressBar.num)}>{progress}</div>
         <div className={active === 'active' ? css(progressBar.text, progressBar.active) : css(progressBar.text)}>
             {status}<br/>{percent}%
         </div>
     </div>
-)
+);
 
 const ProgressBar = ({num, userLoyalty, user_activity}) => {
     if (num < cardInterval.stepThree) {
@@ -41,9 +38,9 @@ const ProgressBar = ({num, userLoyalty, user_activity}) => {
         <div className={css(progressBar.wrap)}>
             <div className={css(progressBar.items)}>
                 <div className={css(progressBar.wrap)}>
-                    <div className={css(progressBar.line)}></div>
+                    <div className={css(progressBar.line)} />
                     <div className={css(progressBar.lineProgressWrap)}>
-                        <div className={css(progressBar.lineProgress)} style={{width: num + '%'}}></div>
+                        <div className={css(progressBar.lineProgress)} style={{width: num + '%'}} />
                     </div>
                     <div className={css(progressBar.items)}>
                         {userLoyalty.settings.cards.map((item, index) => {
@@ -78,19 +75,19 @@ const PercentImg = ({user_activity, userLoyalty}) => {
 const BackgroundCard = ({user_activity, userLoyalty}) => {
     if (user_activity > cardInterval.stepOne && user_activity < cardInterval.stepTwo) {
         return <img className={css(card.cardImg)}
-                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[0].percent}.png`}/>
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[0].percent}.png`} alt=""/>
     } else if (user_activity >= cardInterval.stepTwo && user_activity < cardInterval.stepThree) {
         return <img className={css(card.cardImg)}
-                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[1].percent}.png`}/>
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[1].percent}.png`} alt=""/>
     } else if (user_activity >= cardInterval.stepThree) {
         return <img className={css(card.cardImg)}
-                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[2].percent}.png`}/>
+                    src={`${staticUrl}bg_card_${userLoyalty.settings.cards[2].percent}.png`} alt=""/>
     } else if (user_activity === cardInterval.stepFour) {
         return <img className={css(card.cardImg)}
-                    src={`${staticUrl}bg_card_${this.props.Store.userLoyalty.settings.cards[3].percent}.png`}/>
+                    src={`${staticUrl}bg_card_${this.props.Store.userLoyalty.settings.cards[3].percent}.png`} alt=""/>
     } else {
         return <img className={css(card.cardImg)}
-                    src={`${staticUrl}bg_card_no_auth.png`}/>;
+                    src={`${staticUrl}bg_card_no_auth.png`} alt=""/>;
     }
 };
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'aphrodite/no-important';
 import { connect } from 'react-redux';
 import e from '../../css/end'
-import {Link} from 'react-router';
 
 class EndRegistration extends Component{
     go(){

@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
 import _ from 'underscore';
 import {css} from 'aphrodite/no-important';
 import {browserHistory} from 'react-router';
 import c from '../../css/catalogPage'
-import global from '../../css/global'
-import Item from '../../ui/item'
-import {url} from '../../config/url'
 import 'rc-tabs/assets/index.css';
 import '../../../public/css/fb.css';
 import Tabs, {TabPane} from 'rc-tabs';

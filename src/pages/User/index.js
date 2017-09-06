@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
-import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch } from 'react-axios';
-import cookie from 'react-cookies';
 import u from '../../css/user';
 
 class User extends Component {

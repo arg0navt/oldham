@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
-import { IndexRoute, IndexRedirect, Router,Route, browserHistory } from 'react-router';
+import { Row, Col } from 'reactstrap';
+import { browserHistory } from 'react-router';
 import { urlList } from '../../config/url';
 import { css } from 'aphrodite/no-important';
-import global from '../../css/global';
 import * as ActionType from '../../config/ActionType';
 import styleHeader from '../../css/header';
 
-const NavButton = ({click}) => <div onClick={click} className={css(styleHeader.buttonNav)}></div>
-const Logo = () => <Link to="/"><div className={css(styleHeader.logo)}></div></Link>
-const Shop = ({length}) => <div className={css(styleHeader.buttonShop)}>{length > 0 ? <div className={css(styleHeader.numShop)}></div> : <div></div>}</div>
+const NavButton = ({click}) => <div onClick={click} className={css(styleHeader.buttonNav)} />;
+const Logo = () => <Link to="/"><div className={css(styleHeader.logo)} /></Link>;
+const Shop = ({length}) => <div className={css(styleHeader.buttonShop)}>{length > 0 ? <div className={css(styleHeader.numShop)} /> : null}</div>;
 const Back = () => (
     <div className={css(styleHeader.back)} onClick={browserHistory.goBack}>
         <img className={css(styleHeader.backImg)} src={`${process.env.PUBLIC_URL}/img/icon/back.png`} alt=""/>

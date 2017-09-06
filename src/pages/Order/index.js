@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from 'aphrodite/no-important';
 import order from '../../css/order'
-import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
-import OrderPanel from '../../ui/catalogPanel/panelOrder'
 import moment from 'moment';
 import cookie from 'react-cookies'
 import _ from 'underscore'
@@ -16,7 +14,7 @@ moment.locale('ru');
 
 class Order extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             url:'',
             length:0,
@@ -192,7 +190,6 @@ class Order extends Component{
                         </div>
                     </div>
                 </div>
-                <OrderPanel {...this.state} />
             </div>
         )
     }

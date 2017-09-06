@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import axios from 'axios';
 import * as ActionType from '../config/ActionType';
 import { API, storage } from '../config/url';

@@ -8,7 +8,6 @@ import {getCatalogItems} from '../../queries/catalog';
 import Item from '../../ui/item'
 
 class CatalogItems extends Component {
-
     constructor(props){
         super(props);
         this.rerenderComponent = this.rerenderComponent.bind(this);
@@ -34,6 +33,10 @@ class CatalogItems extends Component {
 
     componentDidMount() {
         this.rerenderComponent(this.props.id);
+        const storageBasket = localStorage.getItem(storage.basket);
+        if (storageBasket) {
+            this.props.pushBasket(JSON.parse(storageBasket));
+        }
     }
 
 
@@ -69,6 +72,9 @@ const mapDispatchToProps = dispatch => ({
     },
     getPushCatalogItems: (id) => {
         getCatalogItems(dispatch, id)
+    },
+    pushBasket: (items) => {
+        dispatch({type: ActionType.ADD_ITEMS_BASKET, payload: items})
     }
 });
 

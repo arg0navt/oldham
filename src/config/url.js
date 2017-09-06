@@ -71,7 +71,8 @@ export const storage = {
     actions: 'actions',
     loyalty: 'loyalty',
     categoryList: 'categoryList',
-    categoryItems: 'categoryItems'
+    categoryItems: 'categoryItems',
+    basket: 'basket',
 };
 
 export const errorTextServer = 'Ошибка от сервера';

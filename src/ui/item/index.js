@@ -5,6 +5,7 @@ import c from '../../css/catalogPage'
 import global from '../../css/global'
 import {Link} from 'react-router';
 import * as ActionType from '../../config/ActionType';
+import { storage } from '../../config/url';
 import _ from 'underscore';
 
 const operatorName = {
@@ -83,9 +84,9 @@ class Item extends Component {
             item_size_m_price,
         } = this.props.item;
 
-        const pushNewState = (numbers, priceItem, size) => {
+        const pushNewState = (numbers, priceItem, size, priceKey) => {
             const price = numbers * priceItem;
-            this.setState({price: {default: price}});
+            Object.assign(this.state.price, {[priceKey]: price});
             this.props.addBasket({
                 name: item_name,
                 category: category_name,
@@ -96,14 +97,14 @@ class Item extends Component {
             })
         };
 
-        const eventsItem = (price, numbers, size) => {
+        const eventsItem = (price, numbers, size, priceKey) => {
             if (operator === operatorName.add) {
                 Object.assign(this.state.numbers, {[numbers]: ++this.state.numbers[numbers]});
-                pushNewState(this.state.numbers[numbers], price, size);
+                pushNewState(this.state.numbers[numbers], price, size, priceKey);
             } else if (operator === operatorName.clean) {
                 if (this.state.numbers[numbers] > 1) {
                     Object.assign(this.state.numbers, {[numbers]: --this.state.numbers[numbers]});
-                    pushNewState(this.state.numbers[numbers], price, size);
+                    pushNewState(this.state.numbers[numbers], price, size, priceKey);
                 } else if (this.state.numbers[numbers] === 1) {
                     Object.assign(this.state.numbers, {[numbers]: 0});
                     Object.assign(this.state.price, {[numbers]: 0});
@@ -120,9 +121,9 @@ class Item extends Component {
         };
 
         if (this.state.size) {
-            eventsItem(Number(item_price) + Number(item_size_m_price), 'sizeNumbers', true);
+            eventsItem(Number(item_price) + Number(item_size_m_price), 'sizeNumbers', true, 'sizePrice');
         } else {
-            eventsItem(Number(item_price), 'default', false);
+            eventsItem(Number(item_price), 'default', false, 'default');
         }
     }
 
@@ -130,6 +131,26 @@ class Item extends Component {
         if (this.props.item.item_size_m_price) {
             this.setState({price: {default: this.state.price.default, sizePrice: 0}});
             this.setState({numbers: {default: this.state.numbers.default, sizeNumbers: 0}});
+        }
+
+        const storageBasket = localStorage.getItem(storage.basket);
+
+        if (storageBasket) {
+            const storageBasketArray = JSON.parse(storageBasket);
+            const findItem = storageBasketArray.filter((item) => {
+                return item.id === this.props.item.item_id
+            });
+            if (findItem.length) {
+                setTimeout(() => {
+                    findItem.map((item) => {
+                        if (item.size) {
+                            this.setState({price: {sizePrice: item.price, default: this.state.price.default}, numbers: {sizeNumbers: item.numbers, default: this.state.numbers.default}, size: item.size});
+                        } else {
+                            this.setState({price: {default: item.price, sizePrice: this.state.price.sizePrice}, numbers: {default: item.numbers, sizeNumbers: this.state.numbers.sizeNumbers}});
+                        }
+                    });
+                });
+            }
         }
     }
 

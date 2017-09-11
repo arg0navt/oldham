@@ -5,7 +5,7 @@ export default StyleSheet.create({
         marginLeft:-15,
         marginRight:-15,
         overflow:'hidden',
-        marginTop:-15
+        marginTop:0
     },
     basketAvtorizations:{
         width:'100%',

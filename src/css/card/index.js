@@ -63,7 +63,8 @@ export default StyleSheet.create({
         paddingRight:30,
         overflow:'hidden',
         '@media (max-width: 365px)': {
-            fontSize:'11px'
+            fontSize:'11px',
+            backgroundSize: 11
         }
     },
     cardScore:{

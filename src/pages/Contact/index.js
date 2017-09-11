@@ -39,7 +39,7 @@ export default class Contact extends Component{
                         <p className={css(con.itemPhoneTextTwo)}>Ежедневно<br/>
 с 11:00 до 23 часов</p>
                     </div>
-                    <div className={css(con.itemPhoneRight)}></div>
+                    <div className={css(con.itemPhoneRight)} />
                 </div>
                 <div className={css(con.item)}>
                     <div className={css(con.itemLeft)}>

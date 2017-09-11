@@ -7,7 +7,7 @@ import form from './form';
 import token from './token';
 import user from './user';
 import userLoyalty from './userLoyalty';
-import actions from './actions';
+import { actions, actionsDetail} from './actions';
 import {category, categoryItems, detailItem} from './category';
 
 export default combineReducers({
@@ -17,6 +17,7 @@ export default combineReducers({
     categoryItems,
     detailItem,
     actions,
+    actionsDetail,
     basket,
     price,
     form,

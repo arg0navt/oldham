@@ -6,11 +6,9 @@ import AppWrap from './ui/AppWrap';
 import Catalog from './pages/Catalog';
 import Detail from './pages/Detail';
 import Basket from './pages/Basket';
-import Order from './pages/Order';
 import Contact from './pages/Contact';
 import Delivery from './pages/Delivery';
 import Guarantees from './pages/Guarantees';
-import Payment from './pages/Payment';
 import Shares from './pages/Shares';
 import SharesDetail from './pages/SharesDetail';
 import End from './pages/End';
@@ -18,7 +16,6 @@ import EndRegistration from './pages/EndRegistration';
 import ComeIn from './pages/ComeIn';
 import Login from './pages/Login';
 import Registration from './pages/Registartion';
-import User from './pages/User';
 import './fonts/GothamPro/styles.css';
 import './fonts/GothamPro-Medium/styles.css';
 import './fonts/GothamPro-Bold/styles.css';
@@ -44,15 +41,11 @@ const routes = (
             <Route path={urlList.dessert} title={titleList.dessert} tabName={'dessert'} component={Catalog}></Route>
             <Route path={urlList.soup} title={titleList.soup} tabName={'soup'} component={Catalog}></Route>
         </Route>
-        <Route path={urlList.detail} component={Detail}>
-            <indexRoute component={Detail} />
-        </Route>
+        <Route path={urlList.detail} component={Detail}></Route>
         <Route path={urlList.basket} component={Basket}></Route>
-        <Route path={urlList.order} component={Order}></Route>
         <Route path={urlList.contact} component={Contact}></Route>
         <Route path={urlList.guarantees} component={Guarantees}></Route>
         <Route path={urlList.delivery} component={Delivery}></Route>
-        <Route path={urlList.payment} component={Payment}></Route>
         <Route path={urlList.shares} component={Shares}></Route>
         <Route path={urlList.shareDetail} component={SharesDetail}></Route>
         <Route path={urlList.end} component={End}></Route>
@@ -60,7 +53,6 @@ const routes = (
         <Route path={urlList.comein} component={ComeIn}></Route>
         <Route path={urlList.login} component={Login}></Route>
         <Route path={urlList.registration} component={Registration}></Route>
-        <Route path={urlList.user} component={User}></Route>
     </Route>
 );
 
@@ -71,6 +63,7 @@ class App extends Component {
             loyalty: JSON.parse(localStorage.getItem(storage.loyalty)) || {} ,
             actions: JSON.parse(localStorage.getItem(storage.actions)) || [],
             catalogList: JSON.parse(localStorage.getItem(storage.categoryList)) || [],
+            basket: JSON.parse(localStorage.getItem(storage.basket)) || []
         };
 
         if (!this.props.Store.token && Object.keys(localStorageObj.user).length) {
@@ -97,6 +90,10 @@ class App extends Component {
             this.props.getPushCatalogCategoty()
         } else {
             this.props.getPushCatalogCategoty()
+        }
+
+        if (localStorageObj.basket.length) {
+            this.props.pushBasket(localStorageObj.basket);
         }
     }
 
@@ -136,6 +133,9 @@ const mapDispatchToProps = dispatch => ({
     },
     getPushCatalogCategoty: () => {
         getCatalogCategoty(dispatch)
+    },
+    pushBasket: (items) => {
+        dispatch({type: ActionType.ADD_ITEMS_BASKET, payload: items})
     }
 });
 

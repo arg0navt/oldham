@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
 import { css } from 'aphrodite/no-important';
 import d from '../../css/delivery'
 import { connect } from 'react-redux';

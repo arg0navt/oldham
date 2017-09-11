@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as ActionType from '../../config/ActionType';
-import {css} from 'aphrodite/no-important';
-import global from '../../css/global';
 import {storage} from '../../config/url';
-import c from '../../css/catalogPage';
 
 const operatorName = {
     add: 'add',
@@ -12,10 +9,10 @@ const operatorName = {
 };
 
 const NumbersItem = ({numbers, onEvent}) => (
-    <div className={css(global.uiNum, c.numItem)}>
-        <div className={css(global.minus, c.minus)} onClick={() => onEvent(operatorName.clean)}/>
-        <input className={css(global.input, c.input)} type="text" value={numbers}/>
-        <div className={css(global.plus, c.plus)} onClick={() => onEvent(operatorName.add)}/>
+    <div className="numbers-item">
+        <div className="numbers-item__button minus" onClick={() => onEvent(operatorName.clean)}><p>-</p></div>
+        <p className="numbers-item__numbers">{numbers}</p>
+        <div className="numbers-item__button plus" onClick={() => onEvent(operatorName.add)}><p>+</p></div>
     </div>
 );
 
@@ -25,7 +22,6 @@ class BasketControl extends Component {
         this.state = {
             numbers: 0,
             price: 0,
-            size: false
         };
         this.onBasket = this.onBasket.bind(this);
     }
@@ -46,7 +42,11 @@ class BasketControl extends Component {
         const pushNewState = (numbers) => {
             let priceNew = 0;
             if (this.props.size) {
-                priceNew = numbers * (Number(item_price) + Number(item_size_m_price));
+                if (item_size_m_price) {
+                    priceNew = numbers * (Number(item_price) + Number(item_size_m_price));
+                } else {
+                    priceNew = numbers * Number(item_price);
+                }
             } else {
                 priceNew = numbers * Number(item_price);
             }
@@ -63,7 +63,6 @@ class BasketControl extends Component {
 
         if (operator === operatorName.add) {
             this.setState({numbers: ++this.state.numbers});
-            console.log(this.state.numbers);
             pushNewState(this.state.numbers);
         } else if (operator === operatorName.clean) {
             if (this.state.numbers > 1) {

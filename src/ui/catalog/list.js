@@ -33,12 +33,7 @@ class CatalogItems extends Component {
 
     componentDidMount() {
         this.rerenderComponent(this.props.id);
-        const storageBasket = localStorage.getItem(storage.basket);
-        if (storageBasket) {
-            this.props.pushBasket(JSON.parse(storageBasket));
-        }
     }
-
 
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.id !== this.props.id){
@@ -73,9 +68,6 @@ const mapDispatchToProps = dispatch => ({
     getPushCatalogItems: (id) => {
         getCatalogItems(dispatch, id)
     },
-    pushBasket: (items) => {
-        dispatch({type: ActionType.ADD_ITEMS_BASKET, payload: items})
-    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatalogItems);

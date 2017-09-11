@@ -78,10 +78,12 @@ class Item extends Component {
                     {item_size_m_price ? (
                         <SwitchSize isActive={this.state.size} switchItemSize={this.switchItemSize}/>
                     ) : null}
-                    {this.state.size ? <BasketControl key={`${item_id}true`} item={this.props.item} size={true} addBlock={<AddBasket
-                            price={Number(item_price) + Number(item_size_m_price)}/>}/>
-                        : <BasketControl key={`${item_id}false`} item={this.props.item} size={false}
-                                         addBlock={<AddBasket price={Number(item_price)}/>}/>}
+                    <div className="control-item">
+                        {this.state.size ? <BasketControl key={`${item_id}true`} item={this.props.item} size={true} addBlock={<AddBasket
+                                price={Number(item_price) + Number(item_size_m_price)}/>}/>
+                            : <BasketControl key={`${item_id}false`} item={this.props.item} size={false}
+                                             addBlock={<AddBasket price={Number(item_price)}/>}/>}
+                    </div>
                 </div>
             </div>
         )

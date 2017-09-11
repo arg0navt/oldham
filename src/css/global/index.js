@@ -36,10 +36,8 @@ export default StyleSheet.create({
     },
     uiNum:{
         width: 125,
-        height: 30,
         display:'block',
         borderRadius:4,
-        border:'1px solid #e64b3b',
         marginTop:15
     },
     minus:{

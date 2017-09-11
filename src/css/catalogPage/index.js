@@ -225,7 +225,11 @@ export default StyleSheet.create({
         height:24,
         overflow:'hidden',
         border:'1px solid #e74b3b',
-        borderRadius:5
+        borderRadius:5,
+        '@media (max-width: 365px)': {
+            width:93,
+            height: 26,
+        }
     },
     widthItem:{
         width:'50%',
@@ -237,6 +241,10 @@ export default StyleSheet.create({
         color:'#ffffff',
         lineHeight:'24px',
         fontFamily: 'GothamPro-Medium',
+        '@media (max-width: 365px)': {
+            fontSize:11,
+            height: 24
+        }
     },
     widthItemActive:{
         background:'#dc4738',

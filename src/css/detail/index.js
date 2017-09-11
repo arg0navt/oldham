@@ -6,7 +6,8 @@ export default StyleSheet.create({
     },
     detailPich:{
         width:'calc(100% + 30px)',
-        marginLeft:-15
+        marginLeft:-15,
+        marginTop:60
     },
     detailImg:{
         display:'block',
@@ -44,18 +45,20 @@ export default StyleSheet.create({
         fontFamily: 'GothamPro-Medium',
         fontSize:24,
         color:'#fff',
-        marginTop:10,
-        marginBottom:10
+        marginTop:15,
+        marginBottom:10,
+        lineHeight:1,
     },
     description:{
         color:'#ffffff',
         fontSize:13,
+        marginBottom: 5
     },
     span:{
         fontSize:11,
         fontFamily: 'GothamPro-Bold',
         display:'block',
-        marginBottom:10
+        marginBottom:7
     },
     list:{
         width:'100%',

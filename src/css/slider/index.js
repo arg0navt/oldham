@@ -1,5 +1,4 @@
 import { StyleSheet } from 'aphrodite/no-important';
-import { url } from '../../config/url'
 
 export default StyleSheet.create({
     sliderWrap:{

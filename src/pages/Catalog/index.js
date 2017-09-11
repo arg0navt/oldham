@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import _ from 'underscore';
 import {css} from 'aphrodite/no-important';
 import {browserHistory} from 'react-router';
 import c from '../../css/catalogPage'
@@ -43,7 +42,7 @@ class Catalog extends Component {
                         })}
                     </Tabs>
                 ) : null}
-                <CatalogItems id={id + 1}/>
+                <CatalogItems id={id + 1} type={activeKey}/>
             </div>
         );
     }

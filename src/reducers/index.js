@@ -8,13 +8,14 @@ import token from './token';
 import user from './user';
 import userLoyalty from './userLoyalty';
 import actions from './actions';
-import {category, categoryItems} from './category';
+import {category, categoryItems, detailItem} from './category';
 
 export default combineReducers({
     routing: routerReducer,
     nav,
     category,
     categoryItems,
+    detailItem,
     actions,
     basket,
     price,

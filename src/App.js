@@ -44,7 +44,9 @@ const routes = (
             <Route path={urlList.dessert} title={titleList.dessert} tabName={'dessert'} component={Catalog}></Route>
             <Route path={urlList.soup} title={titleList.soup} tabName={'soup'} component={Catalog}></Route>
         </Route>
-        <Route path={urlList.detail} component={Detail}></Route>
+        <Route path={urlList.detail} component={Detail}>
+            <indexRoute component={Detail} />
+        </Route>
         <Route path={urlList.basket} component={Basket}></Route>
         <Route path={urlList.order} component={Order}></Route>
         <Route path={urlList.contact} component={Contact}></Route>

@@ -8,3 +8,4 @@ export const PUSH_ITEMS = 'PUSH_ITEMS';
 export const ADD_BASKET = 'ADD_BASKET';
 export const DELETE_ITEM_BASKET = 'DELETE_ITEM_BASKET';
 export const ADD_ITEMS_BASKET = 'ADD_ITEMS_BASKET';
+export const ITEM_DETAIL = 'ITEM_DETAIL';

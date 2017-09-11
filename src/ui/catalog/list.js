@@ -54,7 +54,7 @@ class CatalogItems extends Component {
             <div className={css(c.categoryWr)}>
                 {list ? (
                     <div>
-                        {list.list.map((item, index) => <Item key={item.item_id} item={item} />)}
+                        {list.list.map((item, index) => <Item key={item.item_id} item={item} type={this.props.type} />)}
                     </div>
                 ) : null}
             </div>

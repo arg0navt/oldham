@@ -47,7 +47,7 @@ export const urlList = {
     salad: '/catalog/salad',
     dessert: '/catalog/dessert',
     soup: '/catalog/soup',
-    detail: '/:type/:categogy/:goods',
+    detail: '/catalog/:type/:id',
     basket: '/basket',
     order: '/order',
     contact: '/contact',

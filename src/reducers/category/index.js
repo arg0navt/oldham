@@ -17,3 +17,10 @@ export const categoryItems = function (state = [], action) {
     }
     return state;
 };
+
+export const detailItem = function (state = {}, action) {
+    if (action.type === ActionType.ITEM_DETAIL){
+        return action.payload;
+    }
+    return state;
+};

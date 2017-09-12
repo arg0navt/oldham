@@ -1,47 +1,46 @@
-import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Row, Col} from 'reactstrap';
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import { css } from 'aphrodite/no-important';
+import {css} from 'aphrodite/no-important';
 import slider from '../../css/slider'
-import Swiper from 'react-id-swiper'
 
-const params = {
-    pagination: '.swiper-pagination',
-    paginationClickable: true,
-    spaceBetween: 30,
-    lazyLoading: true
-};
 
 const SlideItem = ({img, text, id}) => (
     <div className={css(slider.slide)}>
-        <Link to={`/share_detail?code=${id}`}><div className={css(slider.blockImg)} style={{backgroundImage:'url(' + img + ')'}}></div></Link>
+        <Link to={`/share_detail?code=${id}`}>
+            <div className={css(slider.blockImg)} style={{backgroundImage: 'url(' + img + ')'}}/>
+        </Link>
         <div className={css(slider.blockText)}>
-            <Row>
-                <Col xs="5">
-                    <Link to={`/share_detail?code=${id}`}><p className={css(slider.sliderText)}><span>{text}</span></p></Link>
-                </Col>
-                <Col xs="5" className={css(slider.rightBlock)}>
-                    <Link to='/shares' className={css(slider.sliderLink)}>Все акции</Link>
-                </Col>
-            </Row>
+            <div>
+                <Link to={`/share_detail?code=${id}`}><p className={css(slider.sliderText)}><span>{text}</span></p>
+                </Link>
+            </div>
+            <div className={css(slider.rightBlock)}>
+                <Link to='/shares' className={css(slider.sliderLink)}>Все акции</Link>
+            </div>
         </div>
     </div>
 );
 
-class Slider extends Component{
-    render(){
-        const { actions } = this.props.Store;
-        return(
+class Slider extends Component {
+    render() {
+        const {actions} = this.props.Store;
+        return (
             <div className={css(slider.sliderWrap)}>
                 {Object.keys(actions).length ? (
-                    <Swiper {...params}>
+                    <div>
                         {actions.map((item, index) => {
-                            return(<div key={index} className="item"><SlideItem img={`http://dev.kaerus.ru/uploads/${item.action_image_s}`} id={item.action_id} text={`${item.action_title}`} /></div>)
+                            if (index === 0) {
+                                return (<div key={index} className="item"><SlideItem
+                                    img={`http://dev.kaerus.ru/uploads/${item.action_image_s}`} id={item.action_id}
+                                    text={`${item.action_title}`}/></div>)
+                            } else {
+                                return null
+                            }
                         })}
-                    </Swiper>
+                    </div>
                 ) : null}
-                <div className="swiper-pagination"></div>
             </div>
         )
     }

@@ -17,6 +17,7 @@ export default StyleSheet.create({
         height:39,
         width:39,
         float:'left',
+        cursor:'pointer'
     },
     backImg:{
         width:16,
@@ -34,6 +35,12 @@ export default StyleSheet.create({
         zIndex:'10',
         background:`url(${url.STATIC_SERVER}/assets/${url.CLIENT_ID}/mod_app/home/bg_mainscreen.jpg) no-repeat center -10px`,
         backgroundSize:'calc(100% + 10px)',
+        '@media screen and (min-width: 500px) , screen and (min-height: 750px)': {
+            maxWidth:375,
+            margin:'auto',
+            left:0,
+            right:0
+        }
     },
     buttonNav:{
         width:'25px',
@@ -41,7 +48,7 @@ export default StyleSheet.create({
         display:'inline-block',
         background:`url(${process.env.PUBLIC_URL}/img/icon/nav.png) no-repeat left center`,
         backgroundSize: 'contain',
-        cursor:'pointer'
+        cursor:'pointer',
     },
     logo:{
         width:'105px',

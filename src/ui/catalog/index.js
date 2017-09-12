@@ -12,7 +12,7 @@ const CatalogItem = ({img, icon, text, link, width}) => (
     </div>
 );
 
-class Slider extends Component{
+class Catalog extends Component{
     render(){
         const { category } = this.props.Store;
         return(
@@ -38,7 +38,7 @@ class Slider extends Component{
                             } else if (item.category_name === 'Десерты') {
                                 link = '/dessert';
                             } else if (item.category_name === 'Супы') {
-                                link = '/sup';
+                                link = '/soup';
                             }
                             return (
                                 <CatalogItem icon={`http://dev.kaerus.ru/uploads/${item.catalog_image_icon}`} key={index} img={`http://dev.kaerus.ru/uploads/${item.catalog_image_340x240}`} text={item.category_name} link={link} />
@@ -55,4 +55,4 @@ const mapStateToProps = state => ({
     Store: state
 });
 
-export default connect(mapStateToProps)(Slider)
+export default connect(mapStateToProps)(Catalog)

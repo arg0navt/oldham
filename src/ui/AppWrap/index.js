@@ -19,11 +19,6 @@ class AppWrap extends Component{
         </section>
         <CatalogPanel location={this.props.location} />
         </div>
-        <div className={css(AppCss.Bg2)} />
-        <div className={css(AppCss.Bg)} />
-        <div className={css(AppCss.landscape)}>
-          <p className={css(AppCss.landscapeText)}>Пожалуйста, поверните телефон в вертикальное положение</p>
-        </div>
       </div>
     )
   }

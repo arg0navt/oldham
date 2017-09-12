@@ -27,7 +27,12 @@ export default StyleSheet.create({
         background:'rgba(0,0,0,.8)',
         width:'100%',
         zIndex:'2',
-        marginTop:'-45px'
+        marginTop:'-45px',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent:'space-between',
+        flexDirection:'row',
+        alignItems:'center',
     },
     sliderText:{
         fontFamily:'GothamPro-Bold, sans-serif',
@@ -63,6 +68,8 @@ export default StyleSheet.create({
         }
     },
     rightBlock:{
+        flex:1,
+        maxWidth:'100%',
         '@media (max-width: 350px)': {
             maxWidth:'39%'
         }

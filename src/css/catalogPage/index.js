@@ -159,6 +159,12 @@ export default StyleSheet.create({
         left:0,
         zIndex:100,
         backgroundSize:'cover',
+        '@media screen and (min-width: 500px) , screen and (min-height: 750px)': {
+            maxWidth:375,
+            margin:'auto',
+            left:0,
+            right:0
+        }
     },
     bottomItem:{
         width:'50%',

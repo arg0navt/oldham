@@ -4,7 +4,7 @@ export const transliterate = (text) => {
     return text.split('').map(function(char){
         return typeof simbol[char] !== 'undefined' ? simbol[char] : char;
     }).join("");
-}
+};
 
 export const url = {
     url:'http://dev.kaerus.ru/Pwa/getCategories.json',

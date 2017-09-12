@@ -10,7 +10,13 @@ export default StyleSheet.create({
         background:'#0d0d0d',
         paddingLeft:'15px',
         paddingRight:'15px',
-        zIndex:'10'
+        zIndex:'10',
+        '@media screen and (min-width: 500px) , screen and (min-height: 750px)': {
+            maxWidth:375,
+            margin:'auto',
+            left:0,
+            right:0
+        }
     },
     sity:{
         fontSize:'14px',

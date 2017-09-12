@@ -100,7 +100,7 @@ class BasketControl extends Component {
         return (
             <div>
                 {numbers ? <NumbersItem numbers={numbers} onEvent={this.onBasket}/> :
-                    <div onClick={() => this.onBasket(operatorName.add)}>{this.props.addBlock}</div>}
+                    <div onClick={() => this.onBasket(operatorName.add)} className="numbers-item__active">{this.props.addBlock}</div>}
             </div>
         )
     }

@@ -35,49 +35,36 @@ class BasketControl extends Component {
             item_size_m_price,
         } = this.props.item;
 
-        const {
-            price,
-        } = this.state;
-
-        const pushNewState = (numbers) => {
-            let priceNew = 0;
-            if (this.props.size) {
-                if (item_size_m_price) {
-                    priceNew = numbers * (Number(item_price) + Number(item_size_m_price));
-                } else {
-                    priceNew = numbers * Number(item_price);
-                }
-            } else {
-                priceNew = numbers * Number(item_price);
-            }
-            this.setState({price: priceNew});
-            this.props.addBasket({
+        const pushBasket = (callback) => {
+            callback({
                 name: item_name,
                 category: category_name,
                 id: item_id,
-                numbers: numbers,
-                price: priceNew,
+                numbers: this.state.numbers,
+                price: this.state.price,
                 size: this.props.size
             })
         };
 
+        const pushNewState = () => {
+            if (this.props.size) {
+                if (item_size_m_price) {
+                    this.setState({price: this.state.numbers * (Number(item_price) + Number(item_size_m_price))}, () => pushBasket(this.props.addBasket));
+                } else {
+                    this.setState({price: this.state.numbers * Number(item_price)},() => pushBasket(this.props.addBasket));
+                }
+            } else {
+                this.setState({price: this.state.numbers * Number(item_price)}, () => pushBasket(this.props.addBasket));
+            }
+        };
+
         if (operator === operatorName.add) {
-            this.setState({numbers: ++this.state.numbers});
-            pushNewState(this.state.numbers);
+            this.setState({numbers: ++this.state.numbers}, () => pushNewState() );
         } else if (operator === operatorName.clean) {
             if (this.state.numbers > 1) {
-                this.setState({numbers: --this.state.numbers});
-                pushNewState(this.state.numbers);
+                this.setState({numbers: --this.state.numbers}, () => pushNewState());
             } else if (this.state.numbers === 1) {
-                this.setState({numbers: 0, price: 0});
-                this.props.deleteItemBasket({
-                    name: item_name,
-                    category: category_name,
-                    id: item_id,
-                    numbers: this.state.numbers,
-                    price: price,
-                    size: this.props.size
-                })
+                this.setState({numbers: 0, price: 0}, () => pushBasket(this.props.deleteItemBasket));
             }
         }
     }
